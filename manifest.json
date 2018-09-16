@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "StepikUpgradeInfo",
+  "description": "Simple description",
+  "version": "1.0",
+  "web_accessible_resources": [],
+  "browser_action": {},
+  "icons": {"32": "icon.png"},
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://stepik.org/*"
+      ],
+      "js": [
+        "inject.js"
+      ]
+    }
+  ]
+}

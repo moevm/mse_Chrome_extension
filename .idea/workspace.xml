@@ -15,7 +15,7 @@
     <session id="219454611">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.3" value="1" />
@@ -70,8 +70,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../chromeExt/inject.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="136">
+              <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -182,7 +182,7 @@
       <updated>1537010728088</updated>
       <workItem from="1537010731099" duration="3236000" />
       <workItem from="1537093274659" duration="120000" />
-      <workItem from="1537124280792" duration="3667000" />
+      <workItem from="1537124280792" duration="3884000" />
     </task>
     <task id="LOCAL-00001" summary="0.1 Создан прототип расширения">
       <created>1537093352287</created>
@@ -202,10 +202,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7023000" />
+    <option name="totallyTimeSpent" value="7240000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21623732" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -271,8 +272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../chromeExt/inject.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        <state relative-caret-position="136">
+          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
         </state>
       </provider>
     </entry>

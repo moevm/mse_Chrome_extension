@@ -6,10 +6,7 @@
   "web_accessible_resources": [],
   "browser_action": {},
   "icons": {"32": "icon.png"},
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
+  "background": {},
   "permissions": [
     "<all_urls>"
   ],

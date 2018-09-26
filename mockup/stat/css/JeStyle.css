@@ -1,0 +1,324 @@
+@font-face {
+    font-family: css; /* Имя шрифта */
+    src: url(2.otf); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+    font-family: jenesius; /* Имя шрифта */
+    src: url(jenesius.ttf); /* Путь к файлу со шрифтом */
+}
+
+/*
+#E6E6E6 - #1 светлосерый(фон)
+#2196f3 - #2 голубой
+#21BB26 - #3 зеленый
+#F40E11 - #4 красный
+#BDBDBD - #5 тёмносерый
+*/
+
+button {
+    font-family: css;
+}
+
+input {
+    font-family: css;
+}
+
+textarea {
+    font-family: css;
+}
+
+select {
+    font-family: css;
+}
+
+:root {
+    --color1: #DED8D8;
+    --color2: #2196f3;
+    --color3: #21BB26;
+    --color4: #F40E11;
+    --color5: #BDBDBD;
+}
+
+body {
+    z-index: 1;
+    font-family: css;
+}
+
+.FULL {
+    height: 100%;
+    width: 100%;
+}
+
+.VA {
+    margin: auto;
+}
+
+.love {
+    color: red;
+    font-size: 15px;
+    font-family: 'Lucida Console';
+}
+
+/**/
+.HorCenter {
+    text-align: center;
+}
+
+.HorRight {
+    text-align: right;
+}
+
+.HorLeft {
+    text-align: left;
+}
+
+/**/
+.VerMiddle {
+    vertical-align: middle;
+}
+
+.VerTop {
+    vertical-align: top;
+}
+
+.VerBottom {
+    vertical-align: bottom;
+}
+
+/**/
+/*----------------------------*/
+@media screen and (max-width: 1080px) {
+    .TTCSM {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTCSM > div {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .TTTSM {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTTSM > div {
+        display: table-cell;
+        vertical-align: top;
+        text-align: center;
+    }
+
+    .TTDSM {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTDSM > div {
+        display: table-cell;
+        vertical-align: bottom;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1081px) and (max-width: 1399px) {
+    .TTCMD {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTCMD > div {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .TTTMD {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTTMD > div {
+        display: table-cell;
+        vertical-align: top;
+        text-align: center;
+    }
+
+    .TTDMD {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTDMD > div {
+        display: table-cell;
+        vertical-align: bottom;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .TTCLG {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTCLG > div {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .TTTLG {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTTLG > div {
+        display: table-cell;
+        vertical-align: top;
+        text-align: center;
+    }
+
+    .TTDLG {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .TTDLG > div {
+        display: table-cell;
+        vertical-align: bottom;
+        text-align: center;
+    }
+}
+
+/*--------------------------*/
+/*to the center*/
+.TTC {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTC > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.TTCR {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTCR > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.TTCL {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTCL > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/*to the top*/
+.TTT {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTT > div {
+    display: table-cell;
+    vertical-align: top;
+    text-align: center;
+}
+
+/*to the down*/
+.TTD {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTD > div {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: center;
+}
+
+/*To the Right*/
+.TTR {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTR > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+
+/*To the Left*/
+.TTL {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTL > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.TTLD {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTLD > div {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: left;
+}
+
+.TTRD {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.TTRD > div {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: right;
+}
+
+/**/
+.Table {
+    height: 100%;
+    width: 100%;
+    display: table;
+}

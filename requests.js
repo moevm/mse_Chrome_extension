@@ -1,9 +1,9 @@
 'use strict';
 const base_url = 'https://stepik.org';
-const client_id='vjMGH2zVSQnMa2Gv1glZ5TSKKFERP7PzbpTHrGgy';
-const client_secret='Brtj8jfJF9CQCSr2EGEsJEGQBuyq1H00INuoIftLJsiA9SCk84ppelTpqOp37ho6JKw0qNGMQKrZmwihokdnN9KKU036Ox6tX5Rn5vMj4NpC2jnOgDYYcCWu1ZzIRq7L';
-const grant_type='client_credentials';
-var course_id,user_id = "19656106",lesson_id,step_index,step_id, access_token, solution_id, section_id, course_id;
+const client_id = 'vjMGH2zVSQnMa2Gv1glZ5TSKKFERP7PzbpTHrGgy';
+const client_secret = 'Brtj8jfJF9CQCSr2EGEsJEGQBuyq1H00INuoIftLJsiA9SCk84ppelTpqOp37ho6JKw0qNGMQKrZmwihokdnN9KKU036Ox6tX5Rn5vMj4NpC2jnOgDYYcCWu1ZzIRq7L';
+const grant_type = 'client_credentials';
+var course_id, user_id = "19656106", lesson_id, step_index, step_id, access_token, solution_id, section_id, course_id;
 var lastSolutionURL;
 var rightSolutions = [];
 var wrongSolutions = [];
@@ -13,6 +13,7 @@ var URL = document.location.href; //Отсюда получаем lesson_id и s
 let ids = URL.split(/[/?]/);
 lesson_id = ids[4];
 step_index = ids[6];
+
 // Получение access_token
 function getAccessToken(moreSolutions) {
     $.ajax({
@@ -22,7 +23,7 @@ function getAccessToken(moreSolutions) {
         dataType: 'json',
         success: function (data) {
             access_token = data.access_token;
-            if (moreSolutions == 2){
+            if (moreSolutions == 2) {
                 getSectionId();
             }
             else
@@ -34,6 +35,7 @@ function getAccessToken(moreSolutions) {
         }
     });
 }
+
 // С этого момента считаем, будто у нас есть access_token
 // Имея lesson_id и step_index, выгружаем нужный степ
 function getStepId(moreSolutions) {
@@ -52,11 +54,13 @@ function getStepId(moreSolutions) {
         }
     });
 }
+
 /*
 *       Парсим user_id конкретного пользователя
 *       из его комментария
 *       и используем его для выгрузки его последних решений
 */
+
 // Считаем, что получили user_id
 function getSolutionId(moreSolutions) {
     $.ajax({
@@ -67,8 +71,8 @@ function getSolutionId(moreSolutions) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },
         success: function (data) {
-            if (moreSolutions == 0){
-                for (let i =0; i < data.submissions.length;i++){
+            if (moreSolutions == 0) {
+                for (let i = 0; i < data.submissions.length; i++) {
                     if (data.submissions[i].status == "correct")
                         rightSolutions.push(data.submissions[i]);
                     else
@@ -85,7 +89,7 @@ function getSolutionId(moreSolutions) {
     });
 }
 
-function getSectionId(){
+function getSectionId() {
     $.ajax({
         url: base_url + "/api/units/?lesson=" + lesson_id,
         type: 'GET',
@@ -100,7 +104,7 @@ function getSectionId(){
     });
 }
 
-function getCourseId(){
+function getCourseId() {
     $.ajax({
         url: base_url + "/api/sections/" + section_id,
         type: 'GET',
@@ -115,7 +119,7 @@ function getCourseId(){
     });
 }
 
-function getUserScore(){
+function getUserScore() {
     $.ajax({
         url: base_url + "/api/course-grades?course=" + course_id + "&user=" + user_id,
         type: 'GET',
@@ -130,7 +134,7 @@ function getUserScore(){
     });
 }
 
-function getUserCost(){
+function getUserCost() {
     $.ajax({
         url: base_url + "/api/progresses/78-" + course_id,
         type: 'GET',
@@ -157,12 +161,10 @@ function getLastSolutionURL() {
 
 // Получение последних решений (на одну страницу помещается 20 последних решений, пока что выгружаем не более 20 решений
 // Считаем, что ссылку на решения автора мы уже получали
-function getUserProgress(){
+function getUserProgress() {
     getAccessToken(2);
 
 }
-
-
 
 
 getLastSolutionURL(); //результат выполнения - в переменной lastSolutionURL

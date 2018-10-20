@@ -16,6 +16,8 @@
         "*://stepik.org/*"
       ],
       "js": [
+        "mockup/comment/js/jquery-3.2.1.min.js",
+        "requests.js",
         "inject.js"
       ]
     }

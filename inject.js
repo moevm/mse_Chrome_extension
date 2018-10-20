@@ -16,6 +16,9 @@ document.addEventListener('click', function () {
         } else {
             parent.appendChild(button);
         }
+        button.addEventListener('click', function () {
+            getAccessToken(0);
+        });
     });
 });
 // <button class="discussions__load-btn small white expand" data-ember-action="1607">Показать обсуждения (1)</button>

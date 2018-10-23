@@ -8,7 +8,7 @@ function getButton(elem) {
     var hrefPrev = elem.find('.ember-link').attr("href");
     var x = '<div class = "button-extensions">' +
         '        <div class = "Prev">' +
-        '            <a href = "' + getLastSolutionURL(hrefPrev.slice(7))+'">' +
+        '            <a href = "' + getLastSolutionURL(hrefPrev.slice(7)) + '">' +
         '                Check Prev' +
         '            </a>' +
         '        </div>' +
@@ -18,8 +18,9 @@ function getButton(elem) {
         '            </div>' +
         '        </div>' +
         '    </div>';
-    elem.find( ".comment-widget__header" ).after(x);//insert comments
+    elem.find(".comment-widget__header").after(x);//insert comments
 }
+
 function getGrafic() {
     var x = '<div class = "grafic-extensions">\n' +
         '        <div>\n' +
@@ -29,23 +30,21 @@ function getGrafic() {
         '    </div>';
     return x;
 }
-function addDate()
-{
-    HeightBlock = $(".discussions__list").height();
-    var children=$('.discussions__list').children();
-    $('.discussions__list').children().each(function () {
-        if($(this).find('.button-extensions' ).length === 0)
-        {
 
-            getButton($(this));                                                            //insert canvas
+function addDate() {
+    HeightBlock = $(".discussions__list").height();
+    var children = $('.discussions__list').children();
+    $('.discussions__list').children().each(function () {
+        if ($(this).find('.button-extensions').length === 0) {
+
+            getButton($(this))  //insert canvas
         }
     });
 
 }
-function addStat()
-{
-    if ($("body").find('#Line').length === 0)
-    {
+
+function addStat() {
+    if ($("body").find('#Line').length === 0) {
         $(".lesson__footer").after(getGrafic());
         /*Передаём в функцию*/
         getChart(a1, a2);

@@ -5,7 +5,9 @@
   "version": "1.0",
   "web_accessible_resources": [],
   "browser_action": {},
-  "icons": {"32": "icon.png"},
+  "icons": {
+    "32": "icon.png"
+  },
   "background": {},
   "permissions": [
     "<all_urls>"
@@ -15,22 +17,17 @@
       "matches": [
         "*://stepik.org/*"
       ],
-      "css":[
+      "css": [
         "mockup/comment/css/style.css",
         "mockup/stat/css/style.css"
-
       ],
       "js": [
-
         "mockup/comment/js/jquery-3.2.1.min.js",
-
         "requests.js",
         "mockup/stat/js/Chart.min.js",
         "mockup/stat/js/js.js",
         "inject.js"
-
       ]
-
     }
   ]
 }

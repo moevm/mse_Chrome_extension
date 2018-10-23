@@ -2,22 +2,59 @@
 
 var HeightBlock = $(".discussions__list").height();
 var buttonComm = '<button class = "ButtonComments">test</button>';
+
+function getButton(elem) {
+
+    var hrefPrev = elem.find('.ember-link').attr("href");
+    var x = '<div class = "button-extensions">' +
+        '        <div class = "Prev">' +
+        '            <a href = "' + getlastsolutionURL(hrefPrev.slice(7))+'">' +
+        '                Check Prev' +
+        '            </a>' +
+        '        </div>' +
+        '        <div class = "progressBar">' +
+        '            <div class = "progress-bar">' +
+        '                <span></span>' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>';
+    elem.find( ".comment-widget__header" ).after(x);//insert comments
+}
+function getGrafic() {
+    var x = '<div class = "grafic-extensions">\n' +
+        '        <div>\n' +
+        '            <canvas id="Line" width="600" height="400"></canvas>\n' +
+        '        </div>\n' +
+        '\n' +
+        '    </div>';
+    return x;
+}
 function addDate()
 {
     HeightBlock = $(".discussions__list").height();
     var children=$('.discussions__list').children();
     $('.discussions__list').children().each(function () {
-        if($(this).find('.ButtonComments' ).length == 0)
+        if($(this).find('.button-extensions' ).length === 0)
         {
-            $(this).find( ".comment-widget__header" ).after(buttonComm);//insert comments
-                                                                        //insert canvas
+
+            getButton($(this));                                                            //insert canvas
         }
     });
+
+}
+function addStat()
+{
+    if ($("body").find('#Line').length === 0)
+    {
+        $(".lesson__footer").after(getGrafic());
+        /*Передаём в функцию*/
+        getChart(a1, a2);
+    }
 }
 
-
 $(window).scroll(function () {
-    if (HeightBlock != $(".discussions__list").height())
+    addStat();
+    if (HeightBlock !== $(".discussions__list").height())
         addDate();
 });
 

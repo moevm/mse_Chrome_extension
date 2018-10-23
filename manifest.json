@@ -15,11 +15,22 @@
       "matches": [
         "*://stepik.org/*"
       ],
+      "css":[
+        "mockup/comment/css/style.css",
+        "mockup/stat/css/style.css"
+
+      ],
       "js": [
+
         "mockup/comment/js/jquery-3.2.1.min.js",
+
         "requests.js",
+        "mockup/stat/js/Chart.min.js",
+        "mockup/stat/js/js.js",
         "inject.js"
+
       ]
+
     }
   ]
 }

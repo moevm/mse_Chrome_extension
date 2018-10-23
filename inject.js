@@ -8,7 +8,7 @@ function getButton(elem) {
     var hrefPrev = elem.find('.ember-link').attr("href");
     var x = '<div class = "button-extensions">' +
         '        <div class = "Prev">' +
-        '            <a href = "' + getlastsolutionURL(hrefPrev.slice(7))+'">' +
+        '            <a href = "' + getLastSolutionURL(hrefPrev.slice(7))+'">' +
         '                Check Prev' +
         '            </a>' +
         '        </div>' +

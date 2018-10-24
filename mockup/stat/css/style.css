@@ -7,10 +7,11 @@
     position: relative;
 }
 .grafic-extensions > div {
-    max-width: 900px;
+
+    max-width: 1030px;
     max-height: 1400px;
     margin: auto;
-
+    top:48px;
 }
 #chartjs-tooltip {
     opacity: 1;

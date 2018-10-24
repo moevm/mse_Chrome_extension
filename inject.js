@@ -1,7 +1,6 @@
 'use strict';
 
 var HeightBlock = $(".discussions__list").height();
-var buttonComm = '<button class = "ButtonComments">test</button>';
 
 function getButton(elem) {
 
@@ -23,7 +22,7 @@ function getButton(elem) {
 function getGrafic() {
     var x = '<div class = "grafic-extensions">\n' +
         '        <div>\n' +
-        '            <canvas id="Line" width="600" height="400"></canvas>\n' +
+        '            <canvas id="Line" width="1022" height="500"></canvas>\n' +
         '        </div>\n' +
         '\n' +
         '    </div>';
@@ -51,32 +50,17 @@ function addStat()
         getChart(a1, a2);
     }
 }
-
-$(window).scroll(function () {
+function checkPage()
+{
     addStat();
     if (HeightBlock !== $(".discussions__list").height())
         addDate();
+}
+$(window).scroll(function () {
+    checkPage();
 });
 
-/*
-document.addEventListener('click', function () {
-    let commentHeader = document.getElementsByClassName("comment-widget__header");
+$('body').on("click",".discussions__load-btn",function () {
+    checkPage();
+});
 
-    Array.from(commentHeader).forEach(function (item, i, commentHeader) {
-        let parent = item.parentElement,
-            next = item.nextSibling,
-            button = document.createElement("button"),
-            text = document.createTextNode("test");
-
-        button.appendChild(text);
-        if (next) {
-            parent.insertBefore(button, next);
-        } else {
-            parent.appendChild(button);
-        }
-        button.addEventListener('click', function () {
-            getAccessToken(0);
-        });
-    });
-});*/
-// <button class="discussions__load-btn small white expand" data-ember-action="1607">Показать обсуждения (1)</button>ton class="discussions__load-btn small white expand" data-ember-action="1607">Показать обсуждения (1)</button>

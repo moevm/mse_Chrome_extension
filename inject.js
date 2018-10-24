@@ -56,11 +56,14 @@ function checkPage()
     if (HeightBlock !== $(".discussions__list").height())
         addDate();
 }
-$(window).scroll(function () {
+/*$(window).scroll(function () {
     checkPage();
 });
 
 $('body').on("click",".discussions__load-btn",function () {
     checkPage();
-});
+});*/
 
+$(document).bind('DOMNodeInserted', function(e) {
+    checkPage();
+});

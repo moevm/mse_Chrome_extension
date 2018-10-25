@@ -16,7 +16,7 @@ step_index = ids[6];
 //строки 12-15 должны быть перенесены в модули для работы со страницей. Соответственно эти параметры должны передаваться извне.
 
 // Получение access_token
-export function getAccessToken() {
+function getAccessToken() {
     let access_token;
     $.ajax({
         url: base_url + "/oauth2/token/",
@@ -30,7 +30,7 @@ export function getAccessToken() {
     return access_token;
 }
 
-export function getStepId(lesson_id, step_index,access_token) {
+function getStepId(lesson_id, step_index,access_token) {
     let step_id;
     $.ajax({
         url: base_url + "/api/lessons/" + lesson_id,
@@ -46,7 +46,7 @@ export function getStepId(lesson_id, step_index,access_token) {
     return step_id;
 }
 
-export function getSolutionId(step_id, user_id,access_token) {
+function getSolutionId(step_id, user_id,access_token) {
     let solution_id;
     $.ajax({
         url: base_url + "/api/submissions?order=desc&page=1&step=" + step_id + "&user=" + user_id,
@@ -62,7 +62,7 @@ export function getSolutionId(step_id, user_id,access_token) {
     return solution_id;
 }
 
-export function getSectionId(lesson_id,access_token) {
+function getSectionId(lesson_id,access_token) {
     let section_id;
     $.ajax({
         url: base_url + "/api/units/?lesson=" + lesson_id,
@@ -78,7 +78,7 @@ export function getSectionId(lesson_id,access_token) {
     return section_id;
 }
 
-export function getCourseId(section_id,access_token) {
+  function getCourseId(section_id,access_token) {
     let course_id;
     $.ajax({
         url: base_url + "/api/sections/" + section_id,
@@ -94,7 +94,7 @@ export function getCourseId(section_id,access_token) {
     return course_id;
 }
 
-export function getUserScore(course_id, user_id,access_token) {
+  function getUserScore(course_id, user_id,access_token) {
     let userScore;
     $.ajax({
         url: base_url + "/api/course-grades?course=" + course_id + "&user=" + user_id,
@@ -110,7 +110,7 @@ export function getUserScore(course_id, user_id,access_token) {
     return userScore;
 }
 
-export function getUserCost(course_id,access_token) {
+  function getUserCost(course_id,access_token) {
     let userCost;
     $.ajax({
         url: base_url + "/api/progresses/78-" + course_id,
@@ -126,7 +126,7 @@ export function getUserCost(course_id,access_token) {
     return userCost;
 }
 
-export function getSolutionList(step_id,access_token){
+  function getSolutionList(step_id,access_token){
     let solution_list = [];
     $.ajax({
         url: base_url + "/api/submissions?order=desc&page=1&step=" + step_id,

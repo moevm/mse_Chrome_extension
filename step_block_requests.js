@@ -1,6 +1,4 @@
-import {getAccessToken,getSolutionList,getStepId} from "./requests";
-
-export function getStepSolutionMap(lesson_id, step_index){
+function getStepSolutionMap(lesson_id, step_index){
     let access_token = getAccessToken();
     let step_id = getStepId(lesson_id,step_index,access_token);
     let solution_list = getSolutionList(step_id,access_token);

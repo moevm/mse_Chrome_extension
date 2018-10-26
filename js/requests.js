@@ -31,7 +31,7 @@ function getAccessToken() {
     return access_token;
 }
 
-function getStepId(lesson_id, step_index,access_token) {
+function getStepId(lesson_id, step_index, access_token) {
     var step_id;
     $.ajaxSetup({async: false});
     $.ajax({
@@ -49,7 +49,7 @@ function getStepId(lesson_id, step_index,access_token) {
     return step_id;
 }
 
-function getSolutionId(step_id, user_id,access_token) {
+function getSolutionId(step_id, user_id, access_token) {
     var solution_id;
     $.ajaxSetup({async: false});
     $.ajax({
@@ -70,7 +70,7 @@ function getSolutionId(step_id, user_id,access_token) {
 
 }
 
-function getSectionId(lesson_id,access_token) {
+function getSectionId(lesson_id, access_token) {
     var section_id;
     $.ajaxSetup({async: false});
     $.ajax({
@@ -87,7 +87,7 @@ function getSectionId(lesson_id,access_token) {
     return section_id;
 }
 
-function getCourseId(section_id,access_token) {
+function getCourseId(section_id, access_token) {
     var course_id;
     $.ajaxSetup({async: false});
     $.ajax({
@@ -104,7 +104,7 @@ function getCourseId(section_id,access_token) {
     return course_id;
 }
 
-function getUserScore(course_id, user_id,access_token) {
+function getUserScore(course_id, user_id, access_token) {
     var userScore;
     $.ajaxSetup({async: false});
     $.ajax({
@@ -121,7 +121,7 @@ function getUserScore(course_id, user_id,access_token) {
     return userScore;
 }
 
-function getUserCost(course_id,access_token) {
+function getUserCost(course_id, access_token) {
     var userCost;
     $.ajaxSetup({async: false});
     $.ajax({
@@ -138,7 +138,7 @@ function getUserCost(course_id,access_token) {
     return userCost;
 }
 
-function getSolutionList(step_id,access_token){
+function getSolutionList(step_id, access_token) {
     var solution_list = [];
     $.ajaxSetup({async: false});
     $.ajax({

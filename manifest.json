@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "StepikUpgradeInfo",
-  "description": "Simple description",
+  "name": "StepikInfoTools",
+  "description": "Graphics and comment widgets for Stepik extension",
   "version": "1.0",
   "web_accessible_resources": [],
   "browser_action": {},
   "icons": {
-    "32": "icon.png"
+    "32": "resources/icon.png"
   },
   "background": {},
   "permissions": [
@@ -23,12 +23,12 @@
       ],
       "js": [
         "mockup/comment/js/jquery-3.2.1.min.js",
-        "requests.js",
+        "js/requests.js",
         "mockup/stat/js/Chart.min.js",
         "mockup/stat/js/js.js",
-        "step_block_requests.js",
-        "comment_block_requests.js",
-        "inject.js"
+        "js/step_block_requests.js",
+        "js/comment_block_requests.js",
+        "js/inject.js"
       ]
     }
   ]

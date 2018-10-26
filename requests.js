@@ -16,8 +16,9 @@ step_index = ids[6];
 //строки 12-15 должны быть перенесены в модули для работы со страницей. Соответственно эти параметры должны передаваться извне.
 
 // Получение access_token
-export function getAccessToken() {
-    let access_token;
+function getAccessToken() {
+    var access_token;
+    $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/oauth2/token/",
         data: {grant_type: grant_type, client_id: client_id, client_secret: client_secret},
@@ -30,11 +31,13 @@ export function getAccessToken() {
     return access_token;
 }
 
-export function getStepId(lesson_id, step_index,access_token) {
-    let step_id;
+function getStepId(lesson_id, step_index,access_token) {
+    var step_id;
+    $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/lessons/" + lesson_id,
         type: 'GET',
+
         dataType: 'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
@@ -46,24 +49,30 @@ export function getStepId(lesson_id, step_index,access_token) {
     return step_id;
 }
 
-export function getSolutionId(step_id, user_id,access_token) {
-    let solution_id;
+function getSolutionId(step_id, user_id,access_token) {
+    var solution_id;
+    $.ajaxSetup({async: false});
     $.ajax({
-        url: base_url + "/api/submissions?order=desc&page=1&step=" + step_id + "&user=" + user_id,
+        url: "https://stepik.org/api/submissions?order=desc&page=1&step=521306&user=19713857",
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },
         success: function (data) {
-            solution_id = data.submissions[0].id;
+            console.log(data);
+            var x = data.submissions;
+            console.log(x[0].id);
+            console.log(data.submissions[0].id);
+            return data.submissions[0].id;
         }
     });
-    return solution_id;
+
 }
 
-export function getSectionId(lesson_id,access_token) {
-    let section_id;
+function getSectionId(lesson_id,access_token) {
+    var section_id;
+    $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/units/?lesson=" + lesson_id,
         type: 'GET',
@@ -78,8 +87,9 @@ export function getSectionId(lesson_id,access_token) {
     return section_id;
 }
 
-export function getCourseId(section_id,access_token) {
-    let course_id;
+  function getCourseId(section_id,access_token) {
+    var course_id;
+      $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/sections/" + section_id,
         type: 'GET',
@@ -94,8 +104,9 @@ export function getCourseId(section_id,access_token) {
     return course_id;
 }
 
-export function getUserScore(course_id, user_id,access_token) {
-    let userScore;
+  function getUserScore(course_id, user_id,access_token) {
+    var userScore;
+      $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/course-grades?course=" + course_id + "&user=" + user_id,
         type: 'GET',
@@ -110,8 +121,9 @@ export function getUserScore(course_id, user_id,access_token) {
     return userScore;
 }
 
-export function getUserCost(course_id,access_token) {
-    let userCost;
+  function getUserCost(course_id,access_token) {
+    var userCost;
+      $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/progresses/78-" + course_id,
         type: 'GET',
@@ -126,8 +138,9 @@ export function getUserCost(course_id,access_token) {
     return userCost;
 }
 
-export function getSolutionList(step_id,access_token){
-    let solution_list = [];
+  function getSolutionList(step_id,access_token){
+    var solution_list = [];
+      $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/submissions?order=desc&page=1&step=" + step_id,
         type: 'GET',

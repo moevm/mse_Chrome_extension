@@ -15,18 +15,23 @@ function get_user_id(elem){
 }
 
 
-function getButton(elem) {
+function getButton(elem_id) {
 
+    var elem = $("#" + elem_id);
     var hrefPrev = elem.find('.ember-link').attr("href");
+    hrefPrev = hrefPrev.slice(7);
+    console.log(hrefPrev);
+    console.log(get_lesson_step()[0]);
+    console.log(get_lesson_step()[1]);
     var x = '<div class = "button-extensions">' +
         '        <div class = "Prev">' +
-        '            <a href = "' + getLastSolutionURL(get_lesson_step()[0],get_lesson_step()[1], get_user_id(elem)) + '">' +
+        '            <a href = "' + getLastSolutionURL(get_lesson_step()[0],get_lesson_step()[1], hrefPrev) + '">' +
         '                Check Prev' +
         '            </a>' +
         '        </div>' +
         '        <div class = "progressBar">' +
         '            <div class = "progress-bar">' +
-        '                <span></span>' +
+        '                <span style = "height:' +getUserProgress(get_lesson_step()[0],hrefPrev) +'%"></span>' +
         '            </div>' +
         '        </div>' +
         '    </div>';
@@ -48,8 +53,7 @@ function addDate() {
     var children = $('.discussions__list').children();
     $('.discussions__list').children().each(function () {
         if ($(this).find('.button-extensions').length === 0) {
-
-            getButton($(this))  //insert canvas
+            getButton(this.id)
         }
     });
 

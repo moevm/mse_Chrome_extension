@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8fdd2e49-97bd-439d-8e07-efea63757072" name="Default Changelist" comment="0.5 Добавил поддержку jquery, cвязал скрипты">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment_block_requests.js" beforeDir="false" afterPath="$PROJECT_DIR$/comment_block_requests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inject.js" beforeDir="false" afterPath="$PROJECT_DIR$/inject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requests.js" beforeDir="false" afterPath="$PROJECT_DIR$/requests.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -110,23 +113,69 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-739170909">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="js" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JavaScript" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="js" value="391" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JavaScript" value="391" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/requests.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+              <folding>
+                <element signature="n#!!block;n#getAccessToken#0" />
+                <element signature="n#!!block;n#getStepId#0" />
+                <element signature="n#!!block;n#getSectionId#0" />
+                <element signature="n#!!block;n#getCourseId#0" />
+                <element signature="n#!!block;n#getSolutionList#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requests.js">
+        <entry file="file://$PROJECT_DIR$/comment_block_requests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+            <state relative-caret-position="323">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -134,10 +183,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inject.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+            <state relative-caret-position="816">
+              <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/step_block_requests.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -171,9 +228,10 @@
         <option value="$PROJECT_DIR$/mockup/comment/js/js.js" />
         <option value="$PROJECT_DIR$/mockup/comment/js/jquery-3.2.1.min.js" />
         <option value="$PROJECT_DIR$/mockup/comment/css/JeStyle.css" />
-        <option value="$PROJECT_DIR$/requests.js" />
-        <option value="$PROJECT_DIR$/inject.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
+        <option value="$PROJECT_DIR$/inject.js" />
+        <option value="$PROJECT_DIR$/comment_block_requests.js" />
+        <option value="$PROJECT_DIR$/requests.js" />
       </list>
     </option>
   </component>
@@ -184,10 +242,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="15" />
-    <option name="y" value="30" />
-    <option name="width" value="1890" />
-    <option name="height" value="1020" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -202,32 +260,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="chromeExt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chromeExt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chromeExt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chromeExt" type="462c0819:PsiDirectoryNode" />
-              <item name="mockup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chromeExt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chromeExt" type="462c0819:PsiDirectoryNode" />
-              <item name="mockup" type="462c0819:PsiDirectoryNode" />
-              <item name="comment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chromeExt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chromeExt" type="462c0819:PsiDirectoryNode" />
-              <item name="mockup" type="462c0819:PsiDirectoryNode" />
-              <item name="comment" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chromeExt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chromeExt" type="462c0819:PsiDirectoryNode" />
-              <item name="mockup" type="462c0819:PsiDirectoryNode" />
-              <item name="stat" type="462c0819:PsiDirectoryNode" />
+              <item name="mse_Chrome_extension" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mse_Chrome_extension" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -282,6 +316,8 @@
       <workItem from="1537993209337" duration="1682000" />
       <workItem from="1540072612878" duration="311000" />
       <workItem from="1540073026196" duration="778000" />
+      <workItem from="1540488909619" duration="2097000" />
+      <workItem from="1540527129909" duration="5794000" />
     </task>
     <task id="LOCAL-00001" summary="0.1 Создан прототип расширения">
       <created>1537093352287</created>
@@ -336,12 +372,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11972000" />
+    <option name="totallyTimeSpent" value="19863000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
+    <frame x="1912" y="-8" width="1296" height="1000" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1069477" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16057234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -444,9 +481,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mockup/comment/css/JeStyle.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/mockup/comment/css/JeStyle.css" />
     <entry file="file://$PROJECT_DIR$/icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -454,30 +489,47 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="566">
           <caret line="54" column="23" selection-end-line="59" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inject.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/step_block_requests.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/comment_block_requests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!block;n#getAccessToken#0" />
+            <element signature="n#!!block;n#getStepId#0" />
+            <element signature="n#!!block;n#getSectionId#0" />
+            <element signature="n#!!block;n#getCourseId#0" />
+            <element signature="n#!!block;n#getSolutionList#0" />
+          </folding>
         </state>
       </provider>
     </entry>

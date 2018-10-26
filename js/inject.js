@@ -2,18 +2,36 @@
 
 var HeightBlock = $(".discussions__list").height();
 
-function getButton(elem) {
+function  get_lesson_step() {
+    var URL = document.location.href; //Отсюда получаем lesson_id и step_index
+    let ids = URL.split(/[/?]/);
+    var lesson_id = ids[4];
+    var step_index = ids[6];
+    return [lesson_id,step_index];
+}
+function get_user_id(elem){
+    var x = elem.find('.ember-link').attr("href");
+    return x.slice(7);
+}
 
+
+function getButton(elem_id) {
+
+    var elem = $("#" + elem_id);
     var hrefPrev = elem.find('.ember-link').attr("href");
+    hrefPrev = hrefPrev.slice(7);
+    console.log(hrefPrev);
+    console.log(get_lesson_step()[0]);
+    console.log(get_lesson_step()[1]);
     var x = '<div class = "button-extensions">' +
         '        <div class = "Prev">' +
-        '            <a href = "' + getLastSolutionURL(hrefPrev.slice(7)) + '">' +
+        '            <a href = "' + getLastSolutionURL(get_lesson_step()[0],get_lesson_step()[1], hrefPrev) + '">' +
         '                Check Prev' +
         '            </a>' +
         '        </div>' +
         '        <div class = "progressBar">' +
         '            <div class = "progress-bar">' +
-        '                <span></span>' +
+        '                <span style = "height:' +getUserProgress(get_lesson_step()[0],hrefPrev) +'%"></span>' +
         '            </div>' +
         '        </div>' +
         '    </div>';
@@ -35,8 +53,7 @@ function addDate() {
     var children = $('.discussions__list').children();
     $('.discussions__list').children().each(function () {
         if ($(this).find('.button-extensions').length === 0) {
-
-            getButton($(this))  //insert canvas
+            getButton(this.id)
         }
     });
 

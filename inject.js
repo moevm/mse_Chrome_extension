@@ -18,6 +18,12 @@ function getButton(elem_id) {
 
 
     var progress = getUserProgress(get_lesson_step()[0],id_check);
+    console.log(progress);
+    if (progress[0] === undefined)
+    {
+        progress = 0;
+    }
+    else
     progress = progress[0] / progress[1] * 100;
 
 

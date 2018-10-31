@@ -3,7 +3,7 @@ const base_url = 'https://stepik.org';
 const client_id = 'twn1edJgt89eHiteEUXHtDR2XCDXi2ec06UBZMMA';
 const client_secret = 'gWJyvnx7rXYOwku5vynQnGYvIOFEel71TXCuP2uxifJABxtwg3o2NueB9rdoZXmHE4ySTfYEKhuVsWFTz6AfXElOz681rNt7GR1IYG6B7ukKi8DHcA0g60VjLzfO6svZ';
 const grant_type = 'client_credentials';
-var course_id, user_id = "19713857", lesson_id, step_index, section_id, course_id;
+var course_id, lesson_id, step_index, section_id;
 var lastSolutionURL;
 var rightSolutions = [];
 var wrongSolutions = [];

@@ -12,6 +12,7 @@
 }
 
 function getUserProgress(lesson_id, user_id){
+
     let access_token = getAccessToken();
     let section_id = getSectionId(lesson_id, access_token);
     let course_id = getCourseId(section_id, access_token);

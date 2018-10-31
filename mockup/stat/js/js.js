@@ -80,12 +80,17 @@ function getChart(arrSuc, arrUnSuc) {
 
 
     var month = [];
-    for (var start = 1; start <= arrSuc.length; start++) {
-        var fMonth = start;
-        if (fMonth < 10)
-            fMonth = '0' + fMonth;
-        month.push(fMonth + ".10" + ".2018");
+    var today = new Date();
+    var inWeek = new Date();
+
+    for (var start = 0; start < 20; start++) {
+
+
+        inWeek.setDate(today.getDate() - start);
+        month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
     }
+
+
 
     var ctx = document.getElementById("Line").getContext('2d');
     var myLineChart = new Chart(ctx, {
@@ -130,12 +135,56 @@ function getChart(arrSuc, arrUnSuc) {
         }
     });
 }
+function  get_lesson_step() {
+    var URL = document.location.href; //Отсюда получаем lesson_id и step_index
+    let ids = URL.split(/[/?]/);
+    var lesson_id = ids[4];
+    var step_index = ids[6];
+    return [lesson_id,step_index];
+}
+function getMinusDays(datax)
+{
 
+
+
+    var data1 = new Date(datax);
+
+    let data2 = new Date();
+
+
+
+    console.log(data2);
+    console.log(data1);
+
+
+    var timeDiff = Math.abs(data2.getTime() - data1.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return diffDays;
+}
+var mapData = getStepSolutionMap(get_lesson_step()[0],get_lesson_step()[1]);
+console.log(mapData.size);
+var a1 =[];
+var a2 = [];
+for (var start = 0; start < 20; start++) {
+    a1.push(0);
+    a2.push(0);
+}
+
+for (var [key, value] of mapData.entries()) {
+    console.log(key + " = " + value);
+
+    var pos = getMinusDays(new Date(key.substr(0,4) + '/' + key.substr(5,2) + '/' + key.substr(8,2)))
+    console.log(pos);
+    if(value[1] === "correct")
+    {
+        a1[pos-1] +=1;
+    }
+}
 
 /*Принимаем массив значений успеха*/
-var a1 = [5, 7, 9, 10, 14, 17, 4, 6, 1, 4, 4, 5, 9, 16, 14, 24, 26, 21, 28, 29, 27, 30, 31, 35, 40, 41, 39, 40];
+//var a1 = [5, 7, 9, 10, 14, 17, 4, 6, 1, 4, 4, 5, 9, 16, 14, 24, 26, 21, 28, 29, 27, 30, 31, 35, 40, 41, 39, 40];
 
 /*Принимаем массив значений провала*/
-var a2 = [69, 68, 73, 74, 80, 83, 90, 94, 93, 92, 92, 92, 80, 76, 72, 71, 64, 48, 39, 38, 35, 34, 26, 25, 25, 28, 29, 25];
+//var a2 = [69, 68, 73, 74, 80, 83, 90, 94, 93, 92, 92, 92, 80, 76, 72, 71, 64, 48, 39, 38, 35, 34, 26, 25, 25, 28, 29, 25];
 
 

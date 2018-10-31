@@ -47,9 +47,19 @@
 .progress-bar span {
     display: inline-block;
     height: 25px;
-    width: 44%;
+    width: 0%;
     box-sizing: content-box;
     border-radius: 3px;
     background-color:#6c6;
     transition: width 1.9s ease-in-out;
+}
+.progress-num
+{
+    position: absolute;
+    margin: auto;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color:black;
 }

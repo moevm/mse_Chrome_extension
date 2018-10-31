@@ -1,9 +1,9 @@
 'use strict';
 const base_url = 'https://stepik.org';
-const client_id = 'vjMGH2zVSQnMa2Gv1glZ5TSKKFERP7PzbpTHrGgy';
-const client_secret = 'Brtj8jfJF9CQCSr2EGEsJEGQBuyq1H00INuoIftLJsiA9SCk84ppelTpqOp37ho6JKw0qNGMQKrZmwihokdnN9KKU036Ox6tX5Rn5vMj4NpC2jnOgDYYcCWu1ZzIRq7L';
+const client_id = 'twn1edJgt89eHiteEUXHtDR2XCDXi2ec06UBZMMA';
+const client_secret = 'gWJyvnx7rXYOwku5vynQnGYvIOFEel71TXCuP2uxifJABxtwg3o2NueB9rdoZXmHE4ySTfYEKhuVsWFTz6AfXElOz681rNt7GR1IYG6B7ukKi8DHcA0g60VjLzfO6svZ';
 const grant_type = 'client_credentials';
-var course_id, user_id = "19656106", lesson_id, step_index, section_id, course_id;
+var course_id, user_id = "19713857", lesson_id, step_index, section_id, course_id;
 var lastSolutionURL;
 var rightSolutions = [];
 var wrongSolutions = [];
@@ -50,24 +50,20 @@ function getStepId(lesson_id, step_index,access_token) {
 }
 
 function getSolutionId(step_id, user_id,access_token) {
-    var solution_id;
+    var sol_id;
     $.ajaxSetup({async: false});
     $.ajax({
-        url: "https://stepik.org/api/submissions?order=desc&page=1&step=521306&user=19713857",
+        url: "https://stepik.org/api/submissions?order=desc&page=1&step=521306&user=" + user_id,
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },
         success: function (data) {
-            console.log(data);
-            var x = data.submissions;
-            console.log(x[0].id);
-            console.log(data.submissions[0].id);
-            return data.submissions[0].id;
+            sol_id =  data.submissions[0]['id'];
         }
     });
-
+    return sol_id;
 }
 
 function getSectionId(lesson_id,access_token) {

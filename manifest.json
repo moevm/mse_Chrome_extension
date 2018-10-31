@@ -25,9 +25,9 @@
         "mockup/comment/js/jquery-3.2.1.min.js",
         "requests.js",
         "mockup/stat/js/Chart.min.js",
-        "mockup/stat/js/js.js",
         "step_block_requests.js",
         "comment_block_requests.js",
+        "mockup/stat/js/js.js",
         "inject.js"
       ]
     }

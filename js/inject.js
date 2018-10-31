@@ -2,36 +2,42 @@
 
 var HeightBlock = $(".discussions__list").height();
 
-function  get_lesson_step() {
-    var URL = document.location.href; //Отсюда получаем lesson_id и step_index
-    let ids = URL.split(/[/?]/);
-    var lesson_id = ids[4];
-    var step_index = ids[6];
-    return [lesson_id,step_index];
-}
+
 function get_user_id(elem){
     var x = elem.find('.ember-link').attr("href");
     return x.slice(7);
 }
 
 
+
 function getButton(elem_id) {
 
     var elem = $("#" + elem_id);
     var hrefPrev = elem.find('.ember-link').attr("href");
-    hrefPrev = hrefPrev.slice(7);
-    console.log(hrefPrev);
-    console.log(get_lesson_step()[0]);
-    console.log(get_lesson_step()[1]);
+    var id_check = hrefPrev.slice(7);
+    hrefPrev = getLastSolutionURL(get_lesson_step()[0],get_lesson_step()[1], id_check);
+
+
+    var progress = getUserProgress(get_lesson_step()[0],id_check);
+    console.log(progress);
+    if (progress[0] === undefined)
+    {
+        progress = 0;
+    }
+    else
+    progress = progress[0] / progress[1] * 100;
+
+
     var x = '<div class = "button-extensions">' +
         '        <div class = "Prev">' +
-        '            <a href = "' + getLastSolutionURL(get_lesson_step()[0],get_lesson_step()[1], hrefPrev) + '">' +
+        '            <a href = "' + hrefPrev + '">' +
         '                Check Prev' +
         '            </a>' +
         '        </div>' +
         '        <div class = "progressBar">' +
         '            <div class = "progress-bar">' +
-        '                <span style = "height:' +getUserProgress(get_lesson_step()[0],hrefPrev) +'%"></span>' +
+        '                <span style = "width:' +progress +'%"></span>' +
+                            '<span class = "progress-num">'+progress.toFixed(2)+'% </span>'
         '            </div>' +
         '        </div>' +
         '    </div>';
@@ -39,6 +45,19 @@ function getButton(elem_id) {
 }
 
 function getGrafic() {
+
+
+
+
+
+
+
+
+
+
+
+
+
     var x = '<div class = "grafic-extensions">\n' +
         '        <div>\n' +
         '            <canvas id="Line" width="1022" height="500"></canvas>\n' +

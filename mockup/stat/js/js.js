@@ -179,6 +179,10 @@ for (var [key, value] of mapData.entries()) {
     {
         a1[pos-1] +=1;
     }
+    else
+    {
+        a2[pos-1] +=1;
+    }
 }
 
 /*Принимаем массив значений успеха*/

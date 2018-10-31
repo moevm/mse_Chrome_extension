@@ -69,8 +69,8 @@ function getChart(arrSuc, arrUnSuc) {
 
         // Display, position, and set styles for font
         tooltipEl.style.opacity = 1;
-        tooltipEl.style.left = position.left + tooltip.caretX + 'px';
-        tooltipEl.style.top = position.top + tooltip.caretY + 'px';
+        tooltipEl.style.left = '50vw';
+        tooltipEl.style.top = '80vh';
         tooltipEl.style.fontFamily = tooltip._fontFamily;
         tooltipEl.style.fontSize = tooltip.fontSize;
         tooltipEl.style.fontStyle = tooltip._fontStyle;

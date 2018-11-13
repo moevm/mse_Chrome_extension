@@ -3,17 +3,8 @@ const base_url = 'https://stepik.org';
 const client_id = 'twn1edJgt89eHiteEUXHtDR2XCDXi2ec06UBZMMA';
 const client_secret = 'gWJyvnx7rXYOwku5vynQnGYvIOFEel71TXCuP2uxifJABxtwg3o2NueB9rdoZXmHE4ySTfYEKhuVsWFTz6AfXElOz681rNt7GR1IYG6B7ukKi8DHcA0g60VjLzfO6svZ';
 const grant_type = 'client_credentials';
-var course_id, lesson_id, step_index, section_id;
-var lastSolutionURL;
-var rightSolutions = [];
-var wrongSolutions = [];
-var userScore, userCost;
 
-var URL = document.location.href; //Отсюда получаем lesson_id и step_index
-let ids = URL.split(/[/?]/);
-lesson_id = ids[4];
-step_index = ids[6];
-//строки 12-15 должны быть перенесены в модули для работы со страницей. Соответственно эти параметры должны передаваться извне.
+
 
 // Получение access_token
 function getAccessToken() {
@@ -43,7 +34,7 @@ function getStepId(lesson_id, step_index,access_token) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },
         success: function (data) {
-            step_id = data.lessons[0].steps[step_index - 1];
+            step_id = data.lessons[0].steps[step_index-1];
         }
     });
     return step_id;
@@ -51,9 +42,9 @@ function getStepId(lesson_id, step_index,access_token) {
 
 function getSolutionId(step_id, user_id,access_token) {
     var sol_id;
-    $.ajaxSetup({async: false});
+    //$.ajaxSetup({async: false});
     $.ajax({
-        url: "https://stepik.org/api/submissions?order=desc&page=1&step=521306&user=" + user_id,
+        url: "https://stepik.org/api/submissions?order=desc&page=1&step="+ step_id + "&user=" + user_id,
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
@@ -70,7 +61,7 @@ function getSectionId(lesson_id,access_token) {
     var section_id;
     $.ajaxSetup({async: false});
     $.ajax({
-        url: base_url + "/api/units/?lesson=" + lesson_id,
+        url: base_url + "/api/units?lesson=" + lesson_id,
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
@@ -102,7 +93,7 @@ function getSectionId(lesson_id,access_token) {
 
   function getUserScore(course_id, user_id,access_token) {
     var userScore;
-      $.ajaxSetup({async: false});
+     // $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/course-grades?course=" + course_id + "&user=" + user_id,
         type: 'GET',

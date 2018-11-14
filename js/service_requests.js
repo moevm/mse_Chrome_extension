@@ -9,6 +9,8 @@ function getServiceInfo(lesson_id, step_index) {
         SECTION_ID = getSectionId(lesson_id, ACCESS_TOKEN);
         COURSE_ID = getCourseId(SECTION_ID, ACCESS_TOKEN);
         USER_COST = getUserCost(COURSE_ID,ACCESS_TOKEN);
+        if (ACCESS_TOKEN === undefined || STEP_ID === undefined|| SOLUTION_LIST === undefined|| SECTION_ID === undefined|| COURSE_ID === undefined|| USER_COST === undefined)
+            return reject(100);
         return resolve(1);
     });
 }

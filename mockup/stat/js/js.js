@@ -1,3 +1,4 @@
+var isCorrectData = true;
 /*Function get Max Elements form two Array*/
 function GME(x, y) {
     return (Math.max(Math.max.apply(null, x), Math.max.apply(null, y)));
@@ -184,6 +185,10 @@ getServiceInfo(get_lesson_step()[0],get_lesson_step()[1]).then(function(){
             a2[pos-1] +=1;
         }
     }
+}).catch(function () {
+    console.log("No service info was loaded");
+    isCorrectData = false;
+    console.log(isCorrectData);
 });              //выгрузка служебной информации в асинхронном режиме
 
 

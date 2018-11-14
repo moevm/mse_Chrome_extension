@@ -47,9 +47,9 @@ function getSolutionId(step_id, user_id,access_token) {
         url: "https://stepik.org/api/submissions?order=desc&page=1&step="+ step_id + "&user=" + user_id,
         type: 'GET',
         dataType: 'json',
-        beforeSend: function (xhr) {
+       /* beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-        },
+        },*/
         success: function (data) {
             sol_id =  data.submissions[0]['id'];
         }
@@ -98,9 +98,9 @@ function getSectionId(lesson_id,access_token) {
         url: base_url + "/api/course-grades?course=" + course_id + "&user=" + user_id,
         type: 'GET',
         dataType: 'json',
-        beforeSend: function (xhr) {
+       /* beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-        },
+        },*/
         success: function (data) {
             userScore = data["course-grades"][0].score;
         }

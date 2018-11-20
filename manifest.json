@@ -22,6 +22,7 @@
         "mockup/stat/css/style.css"
       ],
       "js": [
+        "js/service_requests.js",
         "mockup/comment/js/jquery-3.2.1.min.js",
         "js/requests.js",
         "mockup/stat/js/Chart.min.js",

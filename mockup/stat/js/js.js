@@ -1,3 +1,4 @@
+var isCorrectData = true;
 /*Function get Max Elements form two Array*/
 function GME(x, y) {
     return (Math.max(Math.max.apply(null, x), Math.max.apply(null, y)));
@@ -161,34 +162,34 @@ function getMinusDays(datax)
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return diffDays;
 }
-var mapData = getStepSolutionMap(get_lesson_step()[0],get_lesson_step()[1]);
-console.log(mapData.size);
-var a1 =[];
-var a2 = [];
-for (var start = 0; start < 20; start++) {
-    a1.push(0);
-    a2.push(0);
-}
-
-for (var [key, value] of mapData.entries()) {
-    console.log(key + " = " + value);
-
-    var pos = getMinusDays(new Date(key.substr(0,4) + '/' + key.substr(5,2) + '/' + key.substr(8,2)))
-    console.log(pos);
-    if(value[1] === "correct")
-    {
-        a1[pos-1] +=1;
+var mapData,a1=[],a2=[];
+getServiceInfo(get_lesson_step()[0],get_lesson_step()[1]).then(function(){
+    mapData = getStepSolutionMap();
+    console.log(mapData.size);
+    for (let start = 0; start < 20; start++) {
+        a1.push(0);
+        a2.push(0);
     }
-    else
-    {
-        a2[pos-1] +=1;
+
+    for (let [key, value] of mapData.entries()) {
+        console.log(key + " = " + value);
+
+        let pos = getMinusDays(new Date(key.substr(0,4) + '/' + key.substr(5,2) + '/' + key.substr(8,2)));
+        console.log(pos);
+        if(value[1] === "correct")
+        {
+            a1[pos-1] +=1;
+        }
+        else
+        {
+            a2[pos-1] +=1;
+        }
     }
-}
+}).catch(function () {
+    console.log("No service info was loaded");
+    isCorrectData = false;
+    console.log(isCorrectData);
+});              //выгрузка служебной информации в асинхронном режиме
 
-/*Принимаем массив значений успеха*/
-//var a1 = [5, 7, 9, 10, 14, 17, 4, 6, 1, 4, 4, 5, 9, 16, 14, 24, 26, 21, 28, 29, 27, 30, 31, 35, 40, 41, 39, 40];
-
-/*Принимаем массив значений провала*/
-//var a2 = [69, 68, 73, 74, 80, 83, 90, 94, 93, 92, 92, 92, 80, 76, 72, 71, 64, 48, 39, 38, 35, 34, 26, 25, 25, 28, 29, 25];
 
 

@@ -13,8 +13,6 @@ function getButton(elem_id) {
         if (progress === undefined) {
             progress = 0;
         }
-        else
-           // console.log("usercost:" + USER_COST);
         progress = progress / USER_COST * 100;
 
 
@@ -82,4 +80,3 @@ function getButton(elem_id) {
 $(document).bind('DOMNodeInserted', function(e) {
         checkPage();
 });
-

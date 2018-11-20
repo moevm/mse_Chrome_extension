@@ -93,7 +93,7 @@ function getSectionId(lesson_id,access_token) {
 
   function getUserScore(course_id, user_id,access_token) {
     var userScore;
-     // $.ajaxSetup({async: false});
+      $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/course-grades?course=" + course_id + "&user=" + user_id,
         type: 'GET',

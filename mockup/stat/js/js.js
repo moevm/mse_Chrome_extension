@@ -164,7 +164,10 @@ getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
         console.log(key + " = " + value);
 
         let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
-        console.log(pos);
+        if (pos > 31)
+        {
+            pos = pos - 31;
+        }
         if (value[1] === "correct") {
             a1[pos - 1] += 1;
         } else {

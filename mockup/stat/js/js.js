@@ -1,4 +1,5 @@
 var isCorrectData = true;
+
 /*Function get Max Elements form two Array*/
 function GME(x, y) {
     return (Math.max(Math.max.apply(null, x), Math.max.apply(null, y)));
@@ -7,7 +8,7 @@ function GME(x, y) {
 function getChart(arrSuc, arrUnSuc) {
 
 
-    var customTooltips = function(tooltip) {
+    var customTooltips = function (tooltip) {
 
         var tooltipEl = document.getElementById('chartjs-tooltip');
 
@@ -30,12 +31,11 @@ function getChart(arrSuc, arrUnSuc) {
         if (tooltip.yAlign) {
             tooltipEl.classList.add(tooltip.yAlign);
             console.log("+");
-        }
-        else
-        {
+        } else {
             tooltipEl.classList.add('no-transform');
             console.log("-");
         }
+
         function getBody(bodyItem) {
             return bodyItem.lines;
         }
@@ -47,12 +47,12 @@ function getChart(arrSuc, arrUnSuc) {
 
             var innerHtml = '<thead>';
 
-            titleLines.forEach(function(title) {
+            titleLines.forEach(function (title) {
                 innerHtml += '<tr><th>' + title + '</th></tr>';
             });
             innerHtml += '</thead><tbody>';
 
-            bodyLines.forEach(function(body, i) {
+            bodyLines.forEach(function (body, i) {
                 var colors = tooltip.labelColors[i];
                 var style = 'background:' + colors.backgroundColor;
                 style += '; border-color:' + colors.borderColor;
@@ -79,7 +79,6 @@ function getChart(arrSuc, arrUnSuc) {
     };
 
 
-
     var month = [];
     var today = new Date();
     var inWeek = new Date();
@@ -88,9 +87,8 @@ function getChart(arrSuc, arrUnSuc) {
 
 
         inWeek.setDate(today.getDate() - start);
-        month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
+        month.push(inWeek.getDate() + "." + (inWeek.getMonth() + 1) + "." + (inWeek.getFullYear()));
     }
-
 
 
     var ctx = document.getElementById("Line").getContext('2d');
@@ -136,34 +134,25 @@ function getChart(arrSuc, arrUnSuc) {
         }
     });
 }
-function  get_lesson_step() {
+
+function get_lesson_step() {
     var URL = document.location.href; //Отсюда получаем lesson_id и step_index
     let ids = URL.split(/[/?]/);
     var lesson_id = ids[4];
     var step_index = ids[6];
-    return [lesson_id,step_index];
+    return [lesson_id, step_index];
 }
-function getMinusDays(datax)
-{
 
-
-
+function getMinusDays(datax) {
     var data1 = new Date(datax);
-
     let data2 = new Date();
 
-
-
-    console.log(data2);
-    console.log(data1);
-
-
     var timeDiff = Math.abs(data2.getTime() - data1.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return diffDays;
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
-var mapData,a1=[],a2=[];
-getServiceInfo(get_lesson_step()[0],get_lesson_step()[1]).then(function(){
+
+var mapData, a1 = [], a2 = [];
+getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
     mapData = getStepSolutionMap();
     console.log(mapData.size);
     for (let start = 0; start < 20; start++) {
@@ -174,15 +163,15 @@ getServiceInfo(get_lesson_step()[0],get_lesson_step()[1]).then(function(){
     for (let [key, value] of mapData.entries()) {
         console.log(key + " = " + value);
 
-        let pos = getMinusDays(new Date(key.substr(0,4) + '/' + key.substr(5,2) + '/' + key.substr(8,2)));
-        console.log(pos);
-        if(value[1] === "correct")
+        let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
+        if (pos > 31)
         {
-            a1[pos-1] +=1;
+            pos = pos - 31;
         }
-        else
-        {
-            a2[pos-1] +=1;
+        if (value[1] === "correct") {
+            a1[pos - 1] += 1;
+        } else {
+            a2[pos - 1] += 1;
         }
     }
 }).catch(function () {

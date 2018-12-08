@@ -5,6 +5,12 @@ function GME(x, y) {
     return (Math.max(Math.max.apply(null, x), Math.max.apply(null, y)));
 }
 
+function getCountDaysinMonth(x) {
+    var month = [31,29,31,30,31,30,31,31,30,31,30,31];
+    return month[x]
+}
+
+
 function getChart(arrSuc, arrUnSuc) {
 
 
@@ -85,9 +91,19 @@ function getChart(arrSuc, arrUnSuc) {
 
     for (var start = 0; start < 20; start++) {
 
+        if (start == 0)
+        {
+            inWeek.setDate(inWeek.getDate() - 0);
+        }
+        else
+        inWeek.setDate(inWeek.getDate() - 1);
 
+<<<<<<< Updated upstream
         inWeek.setDate(today.getDate() - start);
         month.push(inWeek.getDate() + "." + (inWeek.getMonth() + 1) + "." + (inWeek.getFullYear()));
+=======
+        month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
+>>>>>>> Stashed changes
     }
 
 
@@ -147,6 +163,10 @@ function getMinusDays(datax) {
     var data1 = new Date(datax);
     let data2 = new Date();
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     var timeDiff = Math.abs(data2.getTime() - data1.getTime());
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
@@ -154,17 +174,28 @@ function getMinusDays(datax) {
 var mapData, a1 = [], a2 = [];
 getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
     mapData = getStepSolutionMap();
-    console.log(mapData.size);
+
     for (let start = 0; start < 20; start++) {
         a1.push(0);
         a2.push(0);
     }
 
     for (let [key, value] of mapData.entries()) {
-        console.log(key + " = " + value);
 
+
+<<<<<<< Updated upstream
         let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
         if (pos > 31)
+=======
+        let pos = getMinusDays(new Date(key.substr(0,4) + '/' + key.substr(5,2) + '/' + key.substr(8,2)));
+        if (pos > 31)
+        {
+            pos = pos - 31;
+        }
+
+
+        if(value[1] === "correct")
+>>>>>>> Stashed changes
         {
             pos = pos - 31;
         }
@@ -174,11 +205,5 @@ getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
             a2[pos - 1] += 1;
         }
     }
-}).catch(function () {
-    console.log("No service info was loaded");
-    isCorrectData = false;
-    console.log(isCorrectData);
-});              //выгрузка служебной информации в асинхронном режиме
-
-
+})
 

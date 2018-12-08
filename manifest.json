@@ -4,7 +4,9 @@
   "description": "Graphics and comment widgets for Stepik extension",
   "version": "1.0",
   "web_accessible_resources": [],
-  "browser_action": {},
+  "browser_action": {
+    "default_popup":"popup/popup.html"
+  },
   "icons": {
     "32": "resources/icon.png"
   },

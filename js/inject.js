@@ -1,16 +1,31 @@
 'use strict';
-
+document.cookie = "flag=0";
 var HeightBlock = $(".discussions__list").height();
+
+function getIDwork() {
+
+}
 
 function getButton(elem_id) {
     if (isCorrectData !== false) {
         var elem = $("#" + elem_id);
         var hrefPrev = elem.find('.ember-link').attr("href");
         var id_check = hrefPrev.slice(7);
+<<<<<<< Updated upstream
         hrefPrev = getLastSolutionURL(id_check);
         var progress = getUserProgress(id_check);
+=======
+       
+       try{ hrefPrev = getLastSolutionURL(id_check);
+        var progress = getUserProgress(id_check);}
+        catch (e) {}
+
+
+
+>>>>>>> Stashed changes
         if (progress === undefined) {
-            progress = 0;
+            return;
+
         }
         progress = progress / USER_COST * 100;
 
@@ -59,8 +74,10 @@ function getButton(elem_id) {
     }
 
     function addStat() {
-        if (isCorrectData !== false) {
-            if ($("body").find('#Line').length === 0) {
+
+        if (isCorrectData !== false && $("div").is('.lesson__footer')) {
+            if ($("*").is('#Line') === false) {
+
                 $(".lesson__footer").after(getGrafic());
                 /*Передаём в функцию*/
                 getChart(a1, a2);
@@ -71,13 +88,29 @@ function getButton(elem_id) {
     function checkPage() {
         if (isCorrectData !== false) {
             addStat();
-            if (HeightBlock !== $(".discussions__list").height())
-                addDate();
+            try{
+
+                if (HeightBlock !== $(".discussions__list").height())
+                    addDate();
+            }
+            catch(ex)
+            {}
+
         }
     }
+<<<<<<< Updated upstream
 var url = undefined;
+=======
+
+    var flag_time = 1;
+>>>>>>> Stashed changes
 $(document).bind('DOMNodeInserted', function(e) {
+
+    if (flag_time === 1)
+    {
+        flag_time = 0;
         checkPage();
+<<<<<<< Updated upstream
         if (url !== undefined) {
             var new_url = document.location.href;
             let new_ids = new_url.split(/[/?]/);
@@ -89,3 +122,15 @@ $(document).bind('DOMNodeInserted', function(e) {
     url = document.location.href;
 
 });
+=======
+
+        setTimeout(function () {
+            flag_time = 1;
+            checkPage();
+        },1000);
+    }
+
+});
+
+
+>>>>>>> Stashed changes

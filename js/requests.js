@@ -127,7 +127,7 @@ function getSectionId(lesson_id,access_token) {
 
   function getSolutionList(step_id,access_token){
     var solution_list = [];
-      $.ajaxSetup({async: false});
+    $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/submissions?order=desc&page=1&step=" + step_id,
         type: 'GET',
@@ -136,7 +136,26 @@ function getSectionId(lesson_id,access_token) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },
         success: function (data) {
-            solution_list = data.submissions; //последние 20 решений (пока что так)
+            solution_list = data.submissions;
+            if (data.meta.has_next === true) {
+                var has_next = true;
+                while (has_next){
+                    let i=2;
+                    $.ajaxSetup({async: false});
+                    $.ajax({
+                        url: base_url + "/api/submissions?order=desc&page="+ i +"&step=" + step_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                        },
+                        success: function (data) {
+                            solution_list.push(data.submissions);
+                            has_next = data.meta.has_next;
+                        }
+                    });
+                }
+            }
         }
     });
     return solution_list;

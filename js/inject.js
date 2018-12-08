@@ -76,7 +76,17 @@ function getButton(elem_id) {
                 addDate();
         }
     }
-
+var url = undefined;
 $(document).bind('DOMNodeInserted', function(e) {
         checkPage();
+        if (url !== undefined) {
+            var new_url = document.location.href;
+            let new_ids = new_url.split(/[/?]/);
+            let ids = url.split(/[/?]/);
+            if (url !== new_url && new_ids[3] === ids[3]) {
+                window.location.reload();
+            }
+        }
+    url = document.location.href;
+
 });

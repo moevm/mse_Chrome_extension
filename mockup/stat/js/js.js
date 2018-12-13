@@ -96,7 +96,7 @@ function getChart(arrSuc, arrUnSuc) {
             inWeek.setDate(inWeek.getDate() - 0);
         }
         else
-        inWeek.setDate(inWeek.getDate() - 1);
+        inWeek.setDate(inWeek.getDate() - start);
         month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
     }
 

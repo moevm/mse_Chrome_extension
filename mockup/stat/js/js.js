@@ -97,13 +97,7 @@ function getChart(arrSuc, arrUnSuc) {
         }
         else
         inWeek.setDate(inWeek.getDate() - 1);
-
-<<<<<<< Updated upstream
-        inWeek.setDate(today.getDate() - start);
-        month.push(inWeek.getDate() + "." + (inWeek.getMonth() + 1) + "." + (inWeek.getFullYear()));
-=======
         month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
->>>>>>> Stashed changes
     }
 
 
@@ -162,11 +156,6 @@ function get_lesson_step() {
 function getMinusDays(datax) {
     var data1 = new Date(datax);
     let data2 = new Date();
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     var timeDiff = Math.abs(data2.getTime() - data1.getTime());
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
@@ -181,21 +170,8 @@ getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
     }
 
     for (let [key, value] of mapData.entries()) {
-
-
-<<<<<<< Updated upstream
         let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
         if (pos > 31)
-=======
-        let pos = getMinusDays(new Date(key.substr(0,4) + '/' + key.substr(5,2) + '/' + key.substr(8,2)));
-        if (pos > 31)
-        {
-            pos = pos - 31;
-        }
-
-
-        if(value[1] === "correct")
->>>>>>> Stashed changes
         {
             pos = pos - 31;
         }

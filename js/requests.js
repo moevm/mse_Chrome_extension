@@ -91,7 +91,7 @@ function getSectionId(lesson_id,access_token) {
     return course_id;
 }
 
-  function getUserScore(course_id, user_id,access_token) {
+  function getUserScore(course_id, user_id, access_token) {
     var userScore;
       $.ajaxSetup({async: false});
     $.ajax({
@@ -102,7 +102,9 @@ function getSectionId(lesson_id,access_token) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },*/
         success: function (data) {
-            userScore = data["course-grades"][0].score;
+            if (data["course-grades"] != null && data["course-grades"][0] != null) {
+                userScore = data["course-grades"][0].score;
+            }
         }
     });
     return userScore;
@@ -150,13 +152,15 @@ function getSectionId(lesson_id,access_token) {
                             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
                         },
                         success: function (data) {
-                            let date = new Date(data.submissions[19].time).getMonth();
-                            alert(date);
-                            let now = new Date().getMonth();
-                            alert(now);
-                            if (date === now && i < 26) {
-                                solution_list.push(data.submissions);
-                                has_next = data.meta.has_next;
+                            if (data.submissions.size > 18) {
+                                let date = new Date(data.submissions[19].time).getMonth();
+                                alert(date);
+                                let now = new Date().getMonth();
+                                alert(now);
+                                if (date === now && i < 26) {
+                                    solution_list.push(data.submissions);
+                                    has_next = data.meta.has_next;
+                                }
                             }
                         }
                     });

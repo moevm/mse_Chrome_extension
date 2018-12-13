@@ -11,18 +11,10 @@ function getButton(elem_id) {
         var elem = $("#" + elem_id);
         var hrefPrev = elem.find('.ember-link').attr("href");
         var id_check = hrefPrev.slice(7);
-<<<<<<< Updated upstream
-        hrefPrev = getLastSolutionURL(id_check);
-        var progress = getUserProgress(id_check);
-=======
-       
+
        try{ hrefPrev = getLastSolutionURL(id_check);
         var progress = getUserProgress(id_check);}
         catch (e) {}
-
-
-
->>>>>>> Stashed changes
         if (progress === undefined) {
             return;
 
@@ -98,19 +90,16 @@ function getButton(elem_id) {
 
         }
     }
-<<<<<<< Updated upstream
+
 var url = undefined;
-=======
-
-    var flag_time = 1;
->>>>>>> Stashed changes
+var flag_time = 1;
 $(document).bind('DOMNodeInserted', function(e) {
-
-    if (flag_time === 1)
-    {
+    if (flag_time === 1) {
+        setTimeout(function () {
+            flag_time = 1;
+            checkPage();
+        }, 1000);
         flag_time = 0;
-        checkPage();
-<<<<<<< Updated upstream
         if (url !== undefined) {
             var new_url = document.location.href;
             let new_ids = new_url.split(/[/?]/);
@@ -119,18 +108,6 @@ $(document).bind('DOMNodeInserted', function(e) {
                 window.location.reload();
             }
         }
-    url = document.location.href;
-
-});
-=======
-
-        setTimeout(function () {
-            flag_time = 1;
-            checkPage();
-        },1000);
+        url = document.location.href;
     }
-
 });
-
-
->>>>>>> Stashed changes

@@ -139,8 +139,8 @@ function getSectionId(lesson_id,access_token) {
             solution_list = data.submissions;
             if (data.meta.has_next === true) {
                 var has_next = true;
+                let i=2;
                 while (has_next){
-                    let i=2;
                     $.ajaxSetup({async: false});
                     $.ajax({
                         url: base_url + "/api/submissions?order=desc&page="+ i +"&step=" + step_id,
@@ -150,10 +150,17 @@ function getSectionId(lesson_id,access_token) {
                             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
                         },
                         success: function (data) {
-                            solution_list.push(data.submissions);
-                            has_next = data.meta.has_next;
+                            let date = new Date(data.submissions[19].time).getMonth();
+                            alert(date);
+                            let now = new Date().getMonth();
+                            alert(now);
+                            if (date === now && i < 26) {
+                                solution_list.push(data.submissions);
+                                has_next = data.meta.has_next;
+                            }
                         }
                     });
+                    i++;
                 }
             }
         }

@@ -163,9 +163,9 @@ function getMinusDays(datax) {
 var mapData, a1 = [], a2 = [];
 getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
     mapData = getStepSolutionMap();
+    console.log(mapData);
     if (mapData === null || SOLUTION_LIST === undefined){
         isCorrectData = false;
-        alert("AHTUNG");
         return;
     }
     for (let start = 0; start < 20; start++) {

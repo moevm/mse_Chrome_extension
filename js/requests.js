@@ -3,7 +3,8 @@ const base_url = 'https://stepik.org';
 const client_id = 'twn1edJgt89eHiteEUXHtDR2XCDXi2ec06UBZMMA';
 const client_secret = 'gWJyvnx7rXYOwku5vynQnGYvIOFEel71TXCuP2uxifJABxtwg3o2NueB9rdoZXmHE4ySTfYEKhuVsWFTz6AfXElOz681rNt7GR1IYG6B7ukKi8DHcA0g60VjLzfO6svZ';
 const grant_type = 'client_credentials';
-
+var page_num = 1;
+var SOLUTION_LIST = [];
 
 // Получение access_token
 function getAccessToken() {
@@ -126,50 +127,30 @@ function getUserCost(course_id, access_token) {
     return userCost;
 }
 
+
 function getSolutionList(step_id, access_token) {
-    var solution_list = [];
     $.ajaxSetup({async: false});
     $.ajax({
-        url: base_url + "/api/submissions?order=desc&page=1&step=" + step_id,
+        url: base_url + "/api/submissions?order=desc&page="+ page_num +"&step=" + step_id,
         type: 'GET',
         dataType: 'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
         },
         success: function (data) {
-            solution_list = data.submissions;
+            if (SOLUTION_LIST.length === 0)
+                SOLUTION_LIST = data.submissions;
+            else {
+                SOLUTION_LIST = [...SOLUTION_LIST,...data.submissions];
+               // SOLUTION_LIST.concat(data.submissions);
+            }
             if (data.meta.has_next === true) {
-                var has_next = data.meta.has_next;
-                let i = 2;
-                while (has_next) {
-                    $.ajaxSetup({async: false});
-                    if (i < 26 && has_next === true) {
-                        $.ajax({
-                            url: base_url + "/api/submissions?order=desc&page=" + i++ + "&step=" + step_id,
-                            type: 'GET',
-                            dataType: 'json',
-                            beforeSend: function (xhr) {
-                                xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-                            },
-                            success: function (data) {
-                                if (data.submissions.length > 0) {
-                                    let date = new Date(data.submissions[data.submissions.length - 1].time).getMonth();
-                                    let now = new Date().getMonth();
-                                    if (date === now) {
-                                        solution_list.push(data.submissions);
-                                        has_next = false;
-                                    }
-                                }
-                            }
-                        });
-                    }
-                    else
-                        break;
-                }
+                page_num++;
+                getSolutionList(step_id, access_token);
             }
         }
     });
-    return solution_list;
+    page_num = 1;
 }
 
 

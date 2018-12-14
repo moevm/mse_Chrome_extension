@@ -163,7 +163,11 @@ function getMinusDays(datax) {
 var mapData, a1 = [], a2 = [];
 getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
     mapData = getStepSolutionMap();
-
+    if (mapData === null || SOLUTION_LIST === undefined){
+        isCorrectData = false;
+        alert("AHTUNG");
+        return;
+    }
     for (let start = 0; start < 20; start++) {
         a1.push(0);
         a2.push(0);
@@ -181,5 +185,9 @@ getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
             a2[pos - 1] += 1;
         }
     }
+}).catch(function () {
+    console.log("No service info was loaded");
+    isCorrectData = false;
+    console.log(isCorrectData);
 })
 

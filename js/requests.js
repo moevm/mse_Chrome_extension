@@ -41,12 +41,12 @@ function getStepId(lesson_id, step_index, access_token) {
 
 function getSolutionId(step_id, user_id, access_token) {
     var sol_id;
-    //$.ajaxSetup({async: false});
+    $.ajaxSetup({async: false});
     $.ajax({
         url: "https://stepik.org/api/submissions?order=desc&page=1&step=" + step_id + "&user=" + user_id,
         type: 'GET',
         dataType: 'json',
-        /* beforeSend: function (xhr) {
+         /*beforeSend: function (xhr) {
              xhr.setRequestHeader("Authorization", "Bearer " + access_token);
          },*/
         success: function (data) {
@@ -139,31 +139,32 @@ function getSolutionList(step_id, access_token) {
         success: function (data) {
             solution_list = data.submissions;
             if (data.meta.has_next === true) {
-                var has_next = true;
+                var has_next = data.meta.has_next;
                 let i = 2;
                 while (has_next) {
                     $.ajaxSetup({async: false});
-                    $.ajax({
-                        url: base_url + "/api/submissions?order=desc&page=" + i + "&step=" + step_id,
-                        type: 'GET',
-                        dataType: 'json',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-                        },
-                        success: function (data) {
-                            if (data.submissions.length > 0) {
-                                let date = new Date(data.submissions[data.submissions.length - 1].time).getMonth();
-                                alert(date);
-                                let now = new Date().getMonth();
-                                alert(now);
-                                if (date === now && i < 26) {
-                                    solution_list.push(data.submissions);
-                                    has_next = data.meta.has_next;
+                    if (i < 26 && has_next === true) {
+                        $.ajax({
+                            url: base_url + "/api/submissions?order=desc&page=" + i++ + "&step=" + step_id,
+                            type: 'GET',
+                            dataType: 'json',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                            },
+                            success: function (data) {
+                                if (data.submissions.length > 0) {
+                                    let date = new Date(data.submissions[data.submissions.length - 1].time).getMonth();
+                                    let now = new Date().getMonth();
+                                    if (date === now) {
+                                        solution_list.push(data.submissions);
+                                        has_next = false;
+                                    }
                                 }
                             }
-                        }
-                    });
-                    i++;
+                        });
+                    }
+                    else
+                        break;
                 }
             }
         }

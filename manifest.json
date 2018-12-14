@@ -17,7 +17,8 @@
   "content_scripts": [
     {
       "matches": [
-        "*://stepik.org/*"
+        "*://stepic.org/lesson/*",
+        "*://stepik.org/lesson/*"
       ],
       "css": [
         "mockup/comment/css/style.css",

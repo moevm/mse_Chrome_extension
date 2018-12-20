@@ -16,8 +16,8 @@ function getButton(elem_id) {
         progress = progress / USER_COST * 100;
 
         if (hrefPrev === null) {
-            var x = '<div class = "button-extensions" style="width:200px">' +
-                '        <div class = "progressBar">' +
+            var x = '<div class = "button-extensions" style="width:210px">' +
+                '        <div class = "progressBar" style="margin-left: 10px">' +
                 '            <div class = "progress-bar">' +
                 '                <span style = "width:' + progress + '%"></span>' +
                 '<span class = "progress-num">' + progress.toFixed(2) + '% </span>' +

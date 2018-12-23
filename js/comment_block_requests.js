@@ -1,10 +1,6 @@
  function getLastSolutionURL(user_id){
-    let solution_id = getSolutionId(STEP_ID, user_id, ACCESS_TOKEN);
-    if (solution_id === undefined){
-        return null;
-    }
-
-    return base_url + "/submissions/" + STEP_ID + "/" + solution_id;
+     USER_LIST = [];
+    getSolutionId(STEP_ID, user_id, ACCESS_TOKEN,1);
 
 }
 

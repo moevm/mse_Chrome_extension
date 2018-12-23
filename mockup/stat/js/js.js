@@ -96,8 +96,9 @@ function getChart(arrSuc, arrUnSuc) {
             inWeek.setDate(inWeek.getDate() - 0);
         }
         else
-        inWeek.setDate(inWeek.getDate() - start);
+        inWeek.setDate(inWeek.getDate() - 1);
         month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
+        //console.log(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
     }
 
 
@@ -160,31 +161,40 @@ function getMinusDays(datax) {
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
 
+
 var mapData, a1 = [], a2 = [];
+for (let start = 0; start < 20; start++) {
+    a1.push(0);
+    a2.push(0);
+
+
+}
+
+
 getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
     mapData = getStepSolutionMap();
-    console.log(mapData);
     if (mapData === null || SOLUTION_LIST === undefined){
         isCorrectData = false;
         return;
     }
-    for (let start = 0; start < 20; start++) {
-        a1.push(0);
-        a2.push(0);
-    }
+
 
     for (let [key, value] of mapData.entries()) {
         let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
-        if (pos > 31)
+        if (pos <= 20)
         {
-            pos = pos - 31;
+            if (value[1] === "correct") {
+
+                a1[pos - 1] += 1;
+            } else {
+                a2[pos - 1] += 1;
+            }
         }
-        if (value[1] === "correct") {
-            a1[pos - 1] += 1;
-        } else {
-            a2[pos - 1] += 1;
-        }
+
     }
+
+
+
 }).catch(function () {
     console.log("No service info was loaded");
     isCorrectData = false;

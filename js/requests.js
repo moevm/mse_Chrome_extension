@@ -6,6 +6,10 @@ const grant_type = 'client_credentials';
 var page_num = 1;
 var SOLUTION_LIST = [];
 
+
+var USER_LIST =[];
+var Stepp;
+
 // Получение access_token
 function getAccessToken() {
     var access_token;
@@ -35,26 +39,34 @@ function getStepId(lesson_id, step_index, access_token) {
         },
         success: function (data) {
             step_id = data.lessons[0].steps[step_index - 1];
+            Stepp = step_id;
         }
     });
     return step_id;
 }
 
-function getSolutionId(step_id, user_id, access_token) {
-    var sol_id;
+
+
+function getSolutionId(step_id, user_id, access_token,page) {
     $.ajaxSetup({async: false});
     $.ajax({
-        url: "https://stepik.org/api/submissions?order=desc&page=1&step=" + step_id + "&user=" + user_id,
+        url: "https://stepik.org/api/submissions?order=desc&page="+page+"&step=" + step_id + "&user=" + user_id,
         type: 'GET',
         dataType: 'json',
-         /*beforeSend: function (xhr) {
-             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-         },*/
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+        },
         success: function (data) {
-            sol_id = data.submissions[0]['id'];
+
+            USER_LIST = USER_LIST.concat(data.submissions);
+
+            if (page <9 && data.meta.has_next === true)
+            {
+                page++;
+                getSolutionId(step_id, user_id, access_token,page);
+            }
         }
     });
-    return sol_id;
 }
 
 function getSectionId(lesson_id, access_token) {
@@ -152,5 +164,28 @@ function getSolutionList(step_id, access_token) {
     });
     page_num = 1;
 }
-
+function getSolutionUserList(user_id,step_id, access_token) {
+    $.ajaxSetup({async: false});
+    $.ajax({
+        url: base_url + "/api/submissions?order=desc&page="+ page_num +"&step=" + step_id+ "&user=" + user_id,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+        },
+        success: function (data) {
+            if (SOLUTION_LIST.length === 0)
+                SOLUTION_LIST = data.submissions;
+            else {
+                SOLUTION_LIST = [...SOLUTION_LIST,...data.submissions];
+                // SOLUTION_LIST.concat(data.submissions);
+            }
+            if (data.meta.has_next === true) {
+                page_num++;
+                getSolutionList(step_id, access_token);
+            }
+        }
+    });
+    page_num = 1;
+}
 

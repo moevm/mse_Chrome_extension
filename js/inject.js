@@ -1,13 +1,58 @@
 'use strict';
-document.cookie = "flag=0";
+
+
+
+
+
 var HeightBlock = $(".discussions__list").height();
 
 function getButton(elem_id) {
     if (isCorrectData !== false) {
         var elem = $("#" + elem_id);
         var hrefPrev = elem.find('.ember-link').attr("href");
+        var timeElem = elem.find('.comment-widget__date').attr("datetime");
+        var dateOfComment = new Date(timeElem);
+
+
         var id_check = hrefPrev.slice(7);
-        hrefPrev = getLastSolutionURL(id_check);
+
+        var correctSol = false;
+        getLastSolutionURL(id_check);
+        var prevSol = USER_LIST;
+
+
+
+
+        let minTime = -9999999999999;
+        let idComment = 1;
+        for(let i = 0; i < prevSol.length; i++)
+        {
+
+            let item = prevSol[i];
+
+            let timeT = item.time;
+            let testDate = new Date(timeT.substr(0,4),(timeT.substr(5,2) - 1),timeT.substr(8,2),timeT.substr(11,2),timeT.substr(14,2),timeT.substr(17,2),0);
+
+
+            testDate.setHours(testDate.getHours() + 3);
+            let RaznizaTime = testDate.getTime() - dateOfComment.getTime();
+            if((RaznizaTime) < 0 && (RaznizaTime) > minTime)
+            {
+                idComment = item.id;
+                minTime = RaznizaTime;
+
+            }
+
+            if (item.status === "correct") {
+                correctSol = true;
+            }
+        }
+
+
+        hrefPrev = base_url + "/submissions/" + Stepp + "/" + idComment;
+
+       // hrefPref
+
         var progress = getUserProgress(id_check);
         if (progress === undefined) {
             return;
@@ -15,8 +60,8 @@ function getButton(elem_id) {
         }
         progress = progress / USER_COST * 100;
 
-        if (hrefPrev === null) {
-            var x = '<div class = "button-extensions" style="width:210px">' +
+        if (minTime === -9999999999999) {
+            var x = '<div class = "button-extensions extens-def" style="width:210px">' +
                 '        <div class = "progressBar" style="margin-left: 10px">' +
                 '            <div class = "progress-bar">' +
                 '                <span style = "width:' + progress + '%"></span>' +
@@ -26,10 +71,15 @@ function getButton(elem_id) {
                 '    </div>';
         }
         else {
-            var x = '<div class = "button-extensions">' +
+            let imgLink;
+            if (correctSol === true)
+             imgLink ="https://image.flaticon.com/icons/svg/128/128384.svg";
+                else
+             imgLink = "https://image.flaticon.com/icons/svg/151/151882.svg";
+            var x = '<div class = "button-extensions extens-def">' +
                 '        <div class = "Prev">' +
                 '            <a href = "' + hrefPrev + '">' +
-                '                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMQSURBVFhHxdi3ixVRGMbha84JzIJZMSDYmf4GC8VQaGFjqBRc0EIwFxZaCdqIiIiVoIUYUcyYQMWcMCsqmBVUDL933YHh8J1z5+wEX3jYvbtzZr7LzJz5ztQqTBfMxRYcwBHsxmIMxX9LZ6zHV/zx+IVdGIBKMxYPYRVleYmJqCRT8AFWISEaMxKlRsV9hFVAFlfQEqVkMnzFvcdK6AuMx3w8gLXtLBSeUHEX0AduuuES3O33o9CEijsLFeKLbiZ3zDe0QCHJU1ySp3DH9kbuqLgn+AH3AFmLUy7DHT8IuaI7ree/XxujbzwdxxBTXHt8gVtgO5SWNk0/s2Qh3OJuIXfGQVPFqiYLMAox0Q1iTegb0Ky0hgoJPcKuYRrqZQSewx3/HcMQHQ3Swd0d+uyA7zoajmewxm1CdCbhLawdhmyHG31RX3HnoZsmKqF5rh6dLl0WSVScNefJXfRFVELFabZXH7cEDTiE30hv8wpJ1JiGiuuPqISKO4eBcDMVb6Bt9AVmQBkCTejufuQOCi3uBDrCl65Qx9Kr8VOtNhiPYe3rNvohKqF+7iRUnB7ky6C7+jgmwIrmxUew9qXJOPqaq1dcJyhzkP6fnsXroOmjLdQVr8ZnpLdLqDir/QomVNwpJMUpmj6s7bK4iejiRsO3hjgNrc7S0Z1rbVvPdUS3UVqz3oe1wzPQ/92oGdgLa4zPYfRAdNbC2qFaJt2RvuhGWY5PsMYn9ARailaIjk6d1YvpkZO1n1NPqFN+EPeggm5gD+Yh637MzIRb3DsU0m4Xka1wC1yDrNF0ol6we+OnErIPboGabrJExb2AxvzERWzDZqxArlOb5CjcArO8H1FxVrMpug4LexG0E+4BFiGUyopT9H7OPYjaed/p0YReWXGK2iC9n3MPpnXqGCRRl6u1iN6vuNtKKcUlsU6zqPlUI6m3TaHJuNTiFO38NayD11N6cUnUz/lOn4/eWEX3c3miu/MqrGLStBDaiOjVVxHR+5bZ0HM1/eJb16M6Hq34m7WoLiNqqdRYajXWQX+oNrXaXx7wC/cUsLYcAAAAAElFTkSuQmCC">' +
+                '                <img src="'+imgLink+'">' +
                 '            </a>' +
                 '            <span class="tooltiptext">Ссылка на последнее неверное решение перед комментированием</span>   ' +
                 '        </div>' +
@@ -47,7 +97,7 @@ function getButton(elem_id) {
     function getGrafic() {
         if (isCorrectData !== false) {
             if (SOLUTION_LIST.length !== 0) {
-                var x = '<div class = "grafic-extensions">\n' +
+                var x = '<div class = "grafic-extensions extens-def">\n' +
                     '        <div>\n' +
                     '            <canvas id="Line" width="1022" height="500"></canvas>\n' +
                     '        </div>\n' +
@@ -116,3 +166,26 @@ $(document).bind('DOMNodeInserted', function(e) {
         url = document.location.href;
     }
 });
+
+
+
+function message_receive(){
+    console.log("ага");
+}
+setInterval(function () {
+    chrome.storage.sync.get(['key'], function(result) {
+
+        if (result.key === "off")
+        {
+            $(".extens-def").fadeOut(0);
+        }
+        else
+        {
+            checkPage();
+            $(".extens-def").fadeIn(0);
+        }
+    });
+},2000)
+$(window).on('storage', message_receive);
+
+

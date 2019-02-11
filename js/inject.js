@@ -5,6 +5,9 @@
 
 
 var HeightBlock = $(".discussions__list").height();
+var chart = null;
+var url = undefined;
+var flag_time = 1;
 
 function getButton(elem_id) {
     if (isCorrectData !== false) {
@@ -127,7 +130,7 @@ function getButton(elem_id) {
 
                 $(".lesson__footer").after(getGrafic());
                 /*Передаём в функцию*/
-                getChart(a1, a2);
+                chart = getChart(a1, a2);
             }
         }
     }
@@ -146,8 +149,7 @@ function getButton(elem_id) {
         }
     }
 
-var url = undefined;
-var flag_time = 1;
+
 $(document).bind('DOMNodeInserted', function(e) {
     if (flag_time === 1) {
         setTimeout(function () {
@@ -161,7 +163,9 @@ $(document).bind('DOMNodeInserted', function(e) {
             let ids = url.split(/[/?]/);
             if (url !== new_url && new_ids[3] === ids[3]) {
                 $(".button-extensions").remove();
-                $(".grafic-extensions").remove();
+                //$(".grafic-extensions").remove();
+                if (chart !== undefined)
+                    updateChartData(chart);
                 checkPage();
             }
         }

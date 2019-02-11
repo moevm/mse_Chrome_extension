@@ -154,7 +154,7 @@ function getSolutionList(step_id, access_token) {
                 SOLUTION_LIST = data.submissions;
             else {
                 SOLUTION_LIST = [...SOLUTION_LIST,...data.submissions];
-               // SOLUTION_LIST.concat(data.submissions);
+
             }
             if (data.meta.has_next === true) {
                 page_num++;

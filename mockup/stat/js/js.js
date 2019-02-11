@@ -1,113 +1,150 @@
 var isCorrectData = true;
+var customTooltips = function (tooltip) {
 
+    var tooltipEl = document.getElementById('chartjs-tooltip');
+
+    if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.id = 'chartjs-tooltip';
+        tooltipEl.innerHTML = "<table></table>";
+        document.body.appendChild(tooltipEl);
+        console.log("+");
+    }
+
+    if (tooltip.opacity === 0) {
+        tooltipEl.style.opacity = 0;
+        console.log("-");
+        return;
+
+    }
+
+    tooltipEl.classList.remove('above', 'below', 'no-transform');
+    if (tooltip.yAlign) {
+        tooltipEl.classList.add(tooltip.yAlign);
+        console.log("+");
+    } else {
+        tooltipEl.classList.add('no-transform');
+        console.log("-");
+    }
+
+    function getBody(bodyItem) {
+        return bodyItem.lines;
+    }
+
+
+    if (tooltip.body) {
+        let titleLines = tooltip.title || [];
+        let bodyLines = tooltip.body.map(getBody);
+
+        let innerHtml = '<thead>';
+
+        titleLines.forEach(function (title) {
+            innerHtml += '<tr><th>' + title + '</th></tr>';
+        });
+        innerHtml += '</thead><tbody>';
+
+        bodyLines.forEach(function (body, i) {
+            var colors = tooltip.labelColors[i];
+            var style = 'background:' + colors.backgroundColor;
+            style += '; border-color:' + colors.borderColor;
+            style += '; border-width: 2px';
+            var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+            innerHtml += '<tr><td>' + span + body + '</td></tr>';
+        });
+        innerHtml += '</tbody>';
+
+        var tableRoot = tooltipEl.querySelector('table');
+        tableRoot.innerHTML = innerHtml;
+    }
+
+    // Display, position, and set styles for font
+    tooltipEl.style.opacity = 1;
+    tooltipEl.style.left = '50vw';
+    tooltipEl.style.top = '80vh';
+    tooltipEl.style.fontFamily = tooltip._fontFamily;
+    tooltipEl.style.fontSize = tooltip.fontSize;
+    tooltipEl.style.fontStyle = tooltip._fontStyle;
+    tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+};
 /*Function get Max Elements form two Array*/
+/**
+ * @return {number}
+ */
 function GME(x, y) {
     return (Math.max(Math.max.apply(null, x), Math.max.apply(null, y)));
 }
 
-function getCountDaysinMonth(x) {
-    var month = [31,29,31,30,31,30,31,31,30,31,30,31];
-    return month[x]
+function updateChartData(chart){
+
+    let newCorrectData = [];
+    let newWrongData = [];
+    STEP_ID = getStepId(get_lesson_step()[0],get_lesson_step()[1], ACCESS_TOKEN);
+    //console.log("Прежний список решений = "+SOLUTION_LIST.length);
+    while (SOLUTION_LIST.length > 0)
+        SOLUTION_LIST.pop();
+    //console.log("Прежний список решений = "+SOLUTION_LIST.length);
+    getSolutionList(STEP_ID, ACCESS_TOKEN);
+    //console.log("Новый список решений = "+SOLUTION_LIST.length);
+    getData(getStepSolutionMap(), newCorrectData, newWrongData);
+    console.log(newWrongData);
+    while (chart.data.datasets[0].data.length > 0)
+        chart.data.datasets[0].data.pop();
+    for (let i=0; i < newCorrectData.length; i++){
+        chart.data.datasets[0].data[i] = newCorrectData[i];
+    }
+    while (chart.data.datasets[1].data.length > 0)
+        chart.data.datasets[1].data.pop();
+    for (let i=0; i < newWrongData.length; i++){
+        chart.data.datasets[1].data[i] = newWrongData[i];
+    }
+    chart.options.scales.yAxes[0].ticks.max = GME(newCorrectData, newWrongData) + 5;
+    chart.update();
+
 }
 
-
-function getChart(arrSuc, arrUnSuc) {
-
-
-    var customTooltips = function (tooltip) {
-
-        var tooltipEl = document.getElementById('chartjs-tooltip');
-
-        if (!tooltipEl) {
-            tooltipEl = document.createElement('div');
-            tooltipEl.id = 'chartjs-tooltip';
-            tooltipEl.innerHTML = "<table></table>"
-            document.body.appendChild(tooltipEl);
-            console.log("+");
+function getData(mapData, a1, a2){
+        for (let start = 0; start < 20; start++) {
+            a1.push(0);
+            a2.push(0);
         }
+        for (let [key, value] of mapData.entries()) {
+            let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
+            if (pos <= 20)
+            {
+                if (value[1] === "correct") {
 
-        if (tooltip.opacity === 0) {
-            tooltipEl.style.opacity = 0;
-            console.log("-");
-            return;
-
+                    a1[pos - 1] += 1;
+                } else {
+                    a2[pos - 1] += 1;
+                }
+            }
         }
+}
 
-        tooltipEl.classList.remove('above', 'below', 'no-transform');
-        if (tooltip.yAlign) {
-            tooltipEl.classList.add(tooltip.yAlign);
-            console.log("+");
-        } else {
-            tooltipEl.classList.add('no-transform');
-            console.log("-");
-        }
+function createLabels(){
+    let month = [];
+    let inWeek = new Date();
 
-        function getBody(bodyItem) {
-            return bodyItem.lines;
-        }
+    for (let start = 0; start < 20; start++) {
 
-
-        if (tooltip.body) {
-            var titleLines = tooltip.title || [];
-            var bodyLines = tooltip.body.map(getBody);
-
-            var innerHtml = '<thead>';
-
-            titleLines.forEach(function (title) {
-                innerHtml += '<tr><th>' + title + '</th></tr>';
-            });
-            innerHtml += '</thead><tbody>';
-
-            bodyLines.forEach(function (body, i) {
-                var colors = tooltip.labelColors[i];
-                var style = 'background:' + colors.backgroundColor;
-                style += '; border-color:' + colors.borderColor;
-                style += '; border-width: 2px';
-                var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-                innerHtml += '<tr><td>' + span + body + '</td></tr>';
-            });
-            innerHtml += '</tbody>';
-
-            var tableRoot = tooltipEl.querySelector('table');
-            tableRoot.innerHTML = innerHtml;
-        }
-
-        var position = this._chart.canvas.getBoundingClientRect();
-
-        // Display, position, and set styles for font
-        tooltipEl.style.opacity = 1;
-        tooltipEl.style.left = '50vw';
-        tooltipEl.style.top = '80vh';
-        tooltipEl.style.fontFamily = tooltip._fontFamily;
-        tooltipEl.style.fontSize = tooltip.fontSize;
-        tooltipEl.style.fontStyle = tooltip._fontStyle;
-        tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-    };
-
-
-    var month = [];
-    var today = new Date();
-    var inWeek = new Date();
-
-    for (var start = 0; start < 20; start++) {
-
-        if (start == 0)
+        if (start === 0)
         {
-            inWeek.setDate(inWeek.getDate() - 0);
+            inWeek.setDate(inWeek.getDate());
         }
         else
-        inWeek.setDate(inWeek.getDate() - 1);
+            inWeek.setDate(inWeek.getDate() - 1);
         month.push(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
-        //console.log(inWeek.getDate() + "." + (inWeek.getMonth()+1) + "." + (inWeek.getFullYear()));
     }
+    return month;
+}
 
-
-    var ctx = document.getElementById("Line").getContext('2d');
-    var myLineChart = new Chart(ctx, {
+function getChart(arrSuc, arrUnSuc) {
+    let ctx = document.getElementById("Line").getContext('2d');
+    return new Chart(ctx, {
         type: 'line',
 
         data: {
-            labels: month,
+            labels: createLabels(),
 
             datasets: [{
                 data: arrSuc,
@@ -162,42 +199,25 @@ function getMinusDays(datax) {
 }
 
 
-var mapData, a1 = [], a2 = [];
+var a1 = [], a2 = [];
 for (let start = 0; start < 20; start++) {
     a1.push(0);
     a2.push(0);
-
-
 }
 
-
-getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
-    mapData = getStepSolutionMap();
-    if (mapData === null || SOLUTION_LIST === undefined){
-        isCorrectData = false;
-        return;
-    }
-
-
-    for (let [key, value] of mapData.entries()) {
-        let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
-        if (pos <= 20)
-        {
-            if (value[1] === "correct") {
-
-                a1[pos - 1] += 1;
-            } else {
-                a2[pos - 1] += 1;
-            }
+function updateInfo(){
+    getServiceInfo(get_lesson_step()[0], get_lesson_step()[1]).then(function () {
+        let mapData = getStepSolutionMap();
+        if (mapData === null || SOLUTION_LIST === undefined){
+            isCorrectData = false;
+            return;
         }
+            getData(mapData, a1, a2);
+    }).catch(function () {
+        console.log("No service info was loaded");
+        isCorrectData = false;
+        console.log(isCorrectData);
+    })
+}
 
-    }
-
-
-
-}).catch(function () {
-    console.log("No service info was loaded");
-    isCorrectData = false;
-    console.log(isCorrectData);
-})
-
+updateInfo();

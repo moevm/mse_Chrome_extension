@@ -160,7 +160,9 @@ $(document).bind('DOMNodeInserted', function(e) {
             let new_ids = new_url.split(/[/?]/);
             let ids = url.split(/[/?]/);
             if (url !== new_url && new_ids[3] === ids[3]) {
-                window.location.reload();
+                $(".button-extensions").remove();
+                $(".grafic-extensions").remove();
+                checkPage();
             }
         }
         url = document.location.href;

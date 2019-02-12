@@ -72,29 +72,3 @@ input:checked + .slider:before
 	color: #66cc66;
 	font-size:17px;
 }
-.title1
-{
-	margin:10px;
-	margin-top: 30px;
-	color: #66cc66;
-	font-size:17px;
-}
-a.button1 {
-	position: absolute;
-	right: 10px;
-	bottom: 5px;
-	font-weight: 700;
-	color: white;
-	text-decoration: none;
-	padding: .6em 1em .7em;
-	/*calc(.8em + 3px);*/
-	border-radius: 5px;
-	background: rgb(103, 204, 103);
-	box-shadow: 0 -3px rgb(94, 185, 94) inset;
-	transition: 0.2s;
-}
-a.button1:hover { background: rgb(102, 195, 102); }
-a.button1:active {
-	background: rgb(88, 155, 88);
-	box-shadow: 0 3px rgb(80, 155, 80) inset;
-}

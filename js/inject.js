@@ -8,7 +8,7 @@ var HeightBlock = $(".discussions__list").height();
 var chart = null;
 var url = undefined;
 var flag_time = 1;
-var buttonClicked = 0;
+var buttonClicked = 1;
 
 function getMoreSolutions(solutionCount){
     buttonClicked++;
@@ -18,6 +18,7 @@ function getMoreSolutions(solutionCount){
 }
 
 function getAllSolutions(){
+    buttonClicked = 0;
     updateChartData(chart, 400);
 }
 
@@ -208,4 +209,96 @@ setInterval(function () {
 },2000)
 $(window).on('storage', message_receive);
 
+function insertButtonExt(elem,id_check)
+{
+    var timeElem = elem.find('.comment-widget__date').attr("datetime");
+    var dateOfComment = new Date(timeElem);
+    getLastSolutionURL(id_check);
+    var prevSol = USER_LIST;
 
+    var correctSol = false;
+    var hrefPrev;
+
+    let minTime = -9999999999999;
+    let idComment = 1;
+    for(let i = 0; i < prevSol.length; i++)
+    {
+        let item = prevSol[i];
+        let timeT = item.time;
+        let testDate = new Date(timeT.substr(0,4),(timeT.substr(5,2) - 1),timeT.substr(8,2),timeT.substr(11,2),timeT.substr(14,2),timeT.substr(17,2),0);
+        testDate.setHours(testDate.getHours() + 3);
+        let RaznizaTime = testDate.getTime() - dateOfComment.getTime();
+        if((RaznizaTime) < 0 && (RaznizaTime) > minTime)
+        {
+            idComment = item.id;
+            minTime = RaznizaTime;
+        }
+        if (item.status === "correct") {
+            correctSol = true;
+        }
+    }
+    hrefPrev = base_url + "/submissions/" + Stepp + "/" + idComment;
+
+    // hrefPref
+
+    var progress = getUserProgress(id_check);
+    if (progress === undefined) {  return;   }
+    progress = progress / USER_COST * 100;
+
+    if (minTime === -9999999999999) {
+        var x = '<div class = "button-extensions extens-def" style="width:210px">' +
+            '        <div class = "progressBar" style="margin-left: 10px">' +
+            '            <div class = "progress-bar">' +
+            '                <span style = "width:' + progress + '%"></span>' +
+            '<span class = "progress-num">' + progress.toFixed(2) + '% </span>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>';
+    }
+    else {
+        let imgLink;
+        if (correctSol === true)
+            imgLink ="https://image.flaticon.com/icons/svg/128/128384.svg";
+        else
+            imgLink = "https://image.flaticon.com/icons/svg/151/151882.svg";
+        var x = '<div class = "button-extensions extens-def">' +
+            '        <div class = "Prev">' +
+            '            <a href = "' + hrefPrev + '">' +
+            '                <img src="'+imgLink+'">' +
+            '            </a>' +
+            '            <span class="tooltiptext">Ссылка на последнее неверное решение перед комментированием</span>   ' +
+            '        </div>' +
+            '        <div class = "progressBar">' +
+            '            <div class = "progress-bar">' +
+            '                <span style = "width:' + progress + '%"></span>' +
+            '<span class = "progress-num">' + progress.toFixed(2) + '% </span>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>';
+    }
+    elem.find(".comment-widget__header").after(x);//insert comments
+    console.log("4");
+}
+var buf = [];
+$("body").on("click", ".comment-widget", function (){
+    console.log("1");
+
+    if ($(this).find(".button-extensions").length === 0)
+    {
+        console.log("2");
+        /*Сылки ещё нет*/
+        var idUser = ($(this).find('.ember-link').attr("href")).slice(7);//Получение id user
+        var idComment = $(this).attr("id");
+        if ($.inArray(idComment,buf) === -1)
+        {
+            buf.push(idComment);
+            console.log("3");
+            insertButtonExt($(this),idUser);
+
+            console.log("5");
+            buf.pop();
+        }
+
+
+    }
+});

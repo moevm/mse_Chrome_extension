@@ -74,7 +74,7 @@ function GME(x, y) {
     return (Math.max(Math.max.apply(null, x), Math.max.apply(null, y)));
 }
 
-function updateChartData(chart){
+function updateChartData(chart, solutionCount){
 
     let newCorrectData = [];
     let newWrongData = [];
@@ -83,10 +83,17 @@ function updateChartData(chart){
     while (SOLUTION_LIST.length > 0)
         SOLUTION_LIST.pop();
     //console.log("Прежний список решений = "+SOLUTION_LIST.length);
-    getSolutionList(STEP_ID, ACCESS_TOKEN);
+    if (solutionCount === undefined) {
+        getPartSolutionList(STEP_ID, ACCESS_TOKEN, 20);
+        getData(getStepSolutionMap(), newCorrectData, newWrongData, 20);
+    }
+    else {
+        getPartSolutionList(STEP_ID, ACCESS_TOKEN, solutionCount);
+        getData(getStepSolutionMap(), newCorrectData, newWrongData, solutionCount);
+    }
     //console.log("Новый список решений = "+SOLUTION_LIST.length);
     getData(getStepSolutionMap(), newCorrectData, newWrongData);
-    console.log(newWrongData);
+    //console.log(newWrongData);
     while (chart.data.datasets[0].data.length > 0)
         chart.data.datasets[0].data.pop();
     for (let i=0; i < newCorrectData.length; i++){
@@ -102,14 +109,14 @@ function updateChartData(chart){
 
 }
 
-function getData(mapData, a1, a2){
-        for (let start = 0; start < 20; start++) {
+function getData(mapData, a1, a2, solutionCount){
+        for (let start = 0; start < solutionCount; start++) {
             a1.push(0);
             a2.push(0);
         }
         for (let [key, value] of mapData.entries()) {
             let pos = getMinusDays(new Date(key.substr(0, 4) + '/' + key.substr(5, 2) + '/' + key.substr(8, 2)));
-            if (pos <= 20)
+            if (pos <= solutionCount)
             {
                 if (value[1] === "correct") {
 
@@ -212,7 +219,7 @@ function updateInfo(){
             isCorrectData = false;
             return;
         }
-            getData(mapData, a1, a2);
+            getData(mapData, a1, a2, 20);
     }).catch(function () {
         console.log("No service info was loaded");
         isCorrectData = false;

@@ -5,7 +5,7 @@ function getServiceInfo(lesson_id, step_index) {
     {
         ACCESS_TOKEN = getAccessToken();
         STEP_ID = getStepId(lesson_id, step_index, ACCESS_TOKEN);
-        getSolutionList(STEP_ID, ACCESS_TOKEN);
+        getPartSolutionList(STEP_ID, ACCESS_TOKEN, 20);
         SECTION_ID = getSectionId(lesson_id, ACCESS_TOKEN);
         COURSE_ID = getCourseId(SECTION_ID, ACCESS_TOKEN);
         USER_COST = getUserCost(COURSE_ID,ACCESS_TOKEN);

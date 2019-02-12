@@ -139,8 +139,35 @@ function getUserCost(course_id, access_token) {
     return userCost;
 }
 
+function getPartSolutionList(step_id, access_token, part) {
+    let numPages = part/20;
+    SOLUTION_LIST.step_id = step_id;
+    $.ajaxSetup({async: false});
+    $.ajax({
+        url: base_url + "/api/submissions?order=desc&page="+ page_num +"&step=" + step_id,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+        },
+        success: function (data) {
+            if (SOLUTION_LIST.length === 0)
+                SOLUTION_LIST = data.submissions;
+            else {
+                SOLUTION_LIST = [...SOLUTION_LIST,...data.submissions];
+
+            }
+            if (data.meta.has_next === true && numPages !== page_num) {
+                page_num++;
+                getPartSolutionList(step_id, access_token, part);
+            }
+        }
+    });
+    page_num = 1;
+}
 
 function getSolutionList(step_id, access_token) {
+    SOLUTION_LIST.step_id = step_id;
     $.ajaxSetup({async: false});
     $.ajax({
         url: base_url + "/api/submissions?order=desc&page="+ page_num +"&step=" + step_id,

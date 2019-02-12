@@ -8,6 +8,18 @@ var HeightBlock = $(".discussions__list").height();
 var chart = null;
 var url = undefined;
 var flag_time = 1;
+var buttonClicked = 0;
+
+function getMoreSolutions(solutionCount){
+    buttonClicked++;
+    if (chart !== null && solutionCount !== undefined){
+        updateChartData(chart, solutionCount*buttonClicked);
+    }
+}
+
+function getAllSolutions(){
+    updateChartData(chart, 400);
+}
 
 function getButton(elem_id) {
     if (isCorrectData !== false) {
@@ -105,6 +117,8 @@ function getButton(elem_id) {
                     '            <canvas id="Line" width="1022" height="500"></canvas>\n' +
                     '        </div>\n' +
                     '\n' +
+                    '<button onclick="getMoreSolutions(20)">ЕЩЕ 20 РЕШЕНИЙ</button>' +
+                    '<button onclick="getAllSolutions()">ВСЕ РЕШЕНИЯ</button>'+
                     '    </div>';
                 return x;
             }
@@ -165,7 +179,7 @@ $(document).bind('DOMNodeInserted', function(e) {
                 $(".button-extensions").remove();
                 //$(".grafic-extensions").remove();
                 if (chart !== undefined)
-                    updateChartData(chart);
+                    updateChartData(chart, undefined);
                 checkPage();
             }
         }

@@ -78,7 +78,10 @@ function updateChartData(chart, solutionCount){
 
     let newCorrectData = [];
     let newWrongData = [];
+    let step_id_buffer = STEP_ID;
     STEP_ID = getStepId(get_lesson_step()[0],get_lesson_step()[1], ACCESS_TOKEN);
+    if (step_id_buffer === STEP_ID)
+        buttonClicked = 1;
     //console.log("Прежний список решений = "+SOLUTION_LIST.length);
     while (SOLUTION_LIST.length > 0)
         SOLUTION_LIST.pop();

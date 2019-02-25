@@ -1,9 +1,6 @@
 'use strict';
 
 
-
-
-
 var HeightBlock = $(".discussions__list").height();
 
 /*function getButton(elem_id) {
@@ -148,7 +145,7 @@ function checkPage() {
 
 var url = undefined;
 var flag_time = 1;
-$(document).bind('DOMNodeInserted', function(e) {
+$(document).bind('DOMNodeInserted', function (e) {
     if (flag_time === 1) {
         setTimeout(function () {
             flag_time = 1;
@@ -168,28 +165,20 @@ $(document).bind('DOMNodeInserted', function(e) {
 });
 
 
-
-
 setInterval(function () {
-    chrome.storage.sync.get(['key'], function(result) {
+    chrome.storage.sync.get(['key'], function (result) {
 
-        if (result.key === "off")
-        {
+        if (result.key === "off") {
             $(".extens-def").fadeOut(0);
-        }
-        else
-        {
+        } else {
             checkPage();
             $(".extens-def").fadeIn(0);
         }
     });
-},2000)
+}, 2000)
 
 
-
-
-function insertButtonExt(elem,id_check)
-{
+function insertButtonExt(elem, id_check) {
     var timeElem = elem.find('.comment-widget__date').attr("datetime");
     var dateOfComment = new Date(timeElem);
     getLastSolutionURL(id_check);
@@ -200,15 +189,13 @@ function insertButtonExt(elem,id_check)
 
     let minTime = -9999999999999;
     let idComment = 1;
-    for(let i = 0; i < prevSol.length; i++)
-    {
+    for (let i = 0; i < prevSol.length; i++) {
         let item = prevSol[i];
         let timeT = item.time;
-        let testDate = new Date(timeT.substr(0,4),(timeT.substr(5,2) - 1),timeT.substr(8,2),timeT.substr(11,2),timeT.substr(14,2),timeT.substr(17,2),0);
+        let testDate = new Date(timeT.substr(0, 4), (timeT.substr(5, 2) - 1), timeT.substr(8, 2), timeT.substr(11, 2), timeT.substr(14, 2), timeT.substr(17, 2), 0);
         testDate.setHours(testDate.getHours() + 3);
         let RaznizaTime = testDate.getTime() - dateOfComment.getTime();
-        if((RaznizaTime) < 0 && (RaznizaTime) > minTime)
-        {
+        if ((RaznizaTime) < 0 && (RaznizaTime) > minTime) {
             idComment = item.id;
             minTime = RaznizaTime;
         }
@@ -221,7 +208,9 @@ function insertButtonExt(elem,id_check)
     // hrefPref
 
     var progress = getUserProgress(id_check);
-    if (progress === undefined) {  return;   }
+    if (progress === undefined) {
+        return;
+    }
     progress = progress / USER_COST * 100;
 
     if (minTime === -9999999999999) {
@@ -233,17 +222,16 @@ function insertButtonExt(elem,id_check)
             '            </div>' +
             '        </div>' +
             '    </div>';
-    }
-    else {
+    } else {
         let imgLink;
         if (correctSol === true)
-            imgLink ="https://image.flaticon.com/icons/svg/128/128384.svg";
+            imgLink = "https://image.flaticon.com/icons/svg/128/128384.svg";
         else
             imgLink = "https://image.flaticon.com/icons/svg/151/151882.svg";
         var x = '<div class = "button-extensions extens-def">' +
             '        <div class = "Prev">' +
             '            <a href = "' + hrefPrev + '">' +
-            '                <img src="'+imgLink+'">' +
+            '                <img src="' + imgLink + '">' +
             '            </a>' +
             '            <span class="tooltiptext">Ссылка на последнее неверное решение перед комментированием</span>   ' +
             '        </div>' +
@@ -260,9 +248,8 @@ function insertButtonExt(elem,id_check)
 }
 
 
-
 var buf = [];
-$("body").on("click", ".comment-widget", function (){
+$("body").on("click", ".comment-widget", function () {
     console.log("1");
     $(this).append('<div class ="Prelouder-ext"><div class="windows8">\n' +
         '\t<div class="wBall wBall_1">\n' +
@@ -282,7 +269,7 @@ $("body").on("click", ".comment-widget", function (){
         '\t</div>\n' +
         '</div></div>');
 
-    setTimeout(tryadd,550,this);
+    setTimeout(tryadd, 550, this);
 
 });
 
@@ -309,13 +296,12 @@ function tryadd(x) {
 }
 
 
-$( document ).ready(function() {
+$(document).ready(function () {
 
-    $("body").on("mouseover", ".discussions__comment-widget", function (){
+    $("body").on("mouseover", ".discussions__comment-widget", function () {
 
-        if ($(this).find(".tooltiptext1").length === 0)
-        {
-            $(this).append('<span class="tooltiptext1">Тыкни и получи печеньку</span>');
+        if ($(this).find(".tooltiptext1").length === 0) {
+            $(this).append('<span class="tooltiptext1">Click to get more info</span>');
 
         }
     });
